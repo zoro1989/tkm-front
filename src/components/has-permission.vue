@@ -12,7 +12,7 @@
     },
     created () {
 //      let permissions = EventBus.permissions
-      // 权限mock数据。
+      // 权限mock数据
       let permissions = [
         'permission:index',
         'permission:addPermission',
