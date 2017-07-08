@@ -67,7 +67,7 @@
       }, (err) => {
         this.$message.error(err)
       })
-      this.changeView('personal-data')
+      this.changeView('member-list')
     },
     data () {
       return {
@@ -107,11 +107,11 @@
     background-color: #4db3ff;
   }
   #first .body{
-    min-height: 100vh;
+    min-height: calc(100vh - 50px);
   }
   #first .body .menu{
     background-color: #eef1f6;
-    min-height: 100vh;
+    min-height: calc(100vh - 50px);
   }
 
 </style>
