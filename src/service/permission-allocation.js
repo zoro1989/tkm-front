@@ -12,7 +12,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.post('/tkm/permission/allocation.tkm', formData)
+    this.$http.post('/permission/allocation.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
   getPermissions (params, success, fail) {
@@ -21,7 +21,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.get('/tkm/permission/selectPermissionById.tkm', {
+    this.$http.get('/permission/selectPermissionById.tkm', {
       params: {id: params.id}
     }).then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
@@ -36,7 +36,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/tkm/permission/addPermission2Role.tkm', formData)
+    this.$http.post('/permission/addPermission2Role.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
   clearPermission (params, success, fail) {
@@ -51,7 +51,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/tkm/role/clearRoleByUserIds.tkm', formData)
+    this.$http.post('/role/clearRoleByUserIds.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   }
 }

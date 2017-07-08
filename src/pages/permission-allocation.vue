@@ -1,5 +1,5 @@
 <template>
-  <section id="role-allocation">
+  <section id="permission-allocation">
     <section class="search-content">
       <mu-text-field v-model="form.findContent" hintText="输入权限名称 / 权限类型" ></mu-text-field>
       <mu-raised-button label="查询"  @click="onSubmit" primary/>
@@ -163,13 +163,13 @@
 </script>
 
 <style scoped>
-   #role-allocation .mu-pagination{
+   #permission-allocation .mu-pagination{
      justify-content: flex-end;
    }
-   #role-allocation .mu-tr .mu-th:first-child,#role-allocation .mu-tr .mu-td:first-child{
+   #permission-allocation .mu-tr .mu-th:first-child,#permission-allocation .mu-tr .mu-td:first-child{
      width: 100px;
    }
-   #role-allocation .mu-tr .mu-th,#role-allocation .mu-tr .mu-td{
+   #permission-allocation .mu-tr .mu-th,#permission-allocation .mu-tr .mu-td{
      white-space:pre-wrap;
      word-break:break-all;
      padding-top: 24px;

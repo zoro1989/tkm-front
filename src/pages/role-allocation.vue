@@ -171,5 +171,4 @@
    #role-allocation .mu-tr .mu-th:first-child,#role-allocation .mu-tr .mu-td:first-child{
      width: 100px;
    }
-
 </style>

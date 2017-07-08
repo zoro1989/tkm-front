@@ -163,5 +163,4 @@
    #member-list .mu-tr .mu-th:first-child,#info-modify .mu-tr .mu-td:first-child{
      width: 100px;
    }
-
 </style>

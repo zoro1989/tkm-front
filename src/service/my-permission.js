@@ -9,7 +9,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.post('/tkm/role/getPermissionTree.tkm')
+    this.$http.post('/role/getPermissionTree.tkm')
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   }
 }

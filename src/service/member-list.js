@@ -12,7 +12,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.post('/tkm/member/list.tkm', formData)
+    this.$http.post('/member/list.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
   delete (params, success, fail) {
@@ -27,7 +27,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/tkm/member/deleteUserById.tkm', formData)
+    this.$http.post('/member/deleteUserById.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
   deleteOne (params, success, fail) {
@@ -38,7 +38,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/tkm/member/deleteUserById.tkm', formData)
+    this.$http.post('/member/deleteUserById.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
   forbidden (params, success, fail) {
@@ -50,7 +50,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/tkm/member/forbidUserById.tkm', formData)
+    this.$http.post('/member/forbidUserById.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   }
 }

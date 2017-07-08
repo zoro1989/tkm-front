@@ -12,7 +12,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.post('/tkm/role/index.tkm', formData)
+    this.$http.post('/role/index.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
   delete (params, success, fail) {
@@ -27,7 +27,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/tkm/role/deleteRoleById.tkm', formData)
+    this.$http.post('/role/deleteRoleById.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
   deleteOne (params, success, fail) {
@@ -38,7 +38,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/tkm/role/deleteRoleById.tkm', formData)
+    this.$http.post('/role/deleteRoleById.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
   addRole (params, success, fail) {
@@ -51,7 +51,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/tkm/role/addRole.tkm', formData)
+    this.$http.post('/role/addRole.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   }
 }

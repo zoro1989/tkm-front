@@ -12,7 +12,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.post('/tkm/role/allocation.tkm', formData)
+    this.$http.post('/role/allocation.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
   getRoles (params, success, fail) {
@@ -21,7 +21,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.get('/tkm/role/selectRoleByUserId.tkm', {
+    this.$http.get('/role/selectRoleByUserId.tkm', {
       params: {id: params.id}
     }).then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
@@ -36,7 +36,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/tkm/role/addRole2User.tkm', formData)
+    this.$http.post('/role/addRole2User.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
   clearRole (params, success, fail) {
@@ -51,7 +51,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/tkm/role/clearRoleByUserIds.tkm', formData)
+    this.$http.post('/role/clearRoleByUserIds.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   }
 }

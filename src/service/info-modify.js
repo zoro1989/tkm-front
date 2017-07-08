@@ -9,7 +9,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.get('/tkm/welcome/userinfo.tkm', {
+    this.$http.get('/welcome/userinfo.tkm', {
       params: {}
     }).then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   },
@@ -23,7 +23,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/tkm/welcome/updateSelf.tkm', formData)
+    this.$http.post('/welcome/updateSelf.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   }
 }

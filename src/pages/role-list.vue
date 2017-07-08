@@ -168,5 +168,4 @@
    #role-list .mu-tr .mu-th:first-child,#role-list .mu-tr .mu-td:first-child{
      width: 100px;
    }
-
 </style>

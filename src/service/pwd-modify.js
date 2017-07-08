@@ -13,7 +13,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/tkm/welcome/updatePswd.tkm', formData)
+    this.$http.post('/welcome/updatePswd.tkm', formData)
       .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
   }
 }
