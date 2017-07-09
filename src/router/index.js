@@ -21,79 +21,105 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      meta: 'login',
+      meta: {
+        title: '登录'
+      },
       component: Login
     },
     {
       path: '/register',
       name: 'register',
-      meta: 'register',
+      meta: {
+        title: '注册'
+      },
       component: Register
     },
     {
       path: '/first',
       name: 'first',
-      meta: 'first',
+      meta: {
+        title: '首页'
+      },
       component: First,
       children: [
         {
           path: '/personal-data',
           name: 'personal-data',
-          meta: 'personal-data',
+          meta: {
+            title: '个人资料'
+          },
           component: PersonalData
         },
         {
           path: '/info-modify',
           name: 'info-modify',
-          meta: 'info-modify',
+          meta: {
+            title: '资料修改'
+          },
           component: InfoModify
         },
         {
           path: '/pdw-modify',
           name: 'pdw-modify',
-          meta: 'pdw-modify',
+          meta: {
+            title: '密码修改'
+          },
           component: PdwModify
         },
         {
           path: '/my-permission',
           name: 'my-permission',
-          meta: 'my-permission',
+          meta: {
+            title: '我的权限'
+          },
           component: MyPermission
         },
         {
           path: '/message-push',
           name: 'message-push',
-          meta: 'message-push',
+          meta: {
+            title: '消息推送'
+          },
           component: MessagePush
         },
         {
           path: '/member-list',
           name: 'member-list',
-          meta: 'member-list',
+          meta: {
+            title: '用户列表'
+          },
           component: MemberList
         },
         {
           path: '/role-list',
           name: 'role-list',
-          meta: 'role-list',
+          meta: {
+            title: '角色列表'
+          },
           component: RoleList
         },
         {
           path: '/role-allocation',
           name: 'role-allocation',
-          meta: 'role-allocation',
+          meta: {
+            title: '角色分配'
+          },
           component: RoleAllocation
         },
         {
           path: '/permission-list',
           name: 'permission-list',
-          meta: 'permission-list',
+          meta: {
+            title: '权限列表'
+          },
           component: PermissionList
         },
         {
           path: '/permission-allocation',
           name: 'permission-allocation',
-          meta: 'permission-allocation',
+          meta: {
+            title: '权限分配'
+          },
           component: PermissionAllocation
         }
       ]

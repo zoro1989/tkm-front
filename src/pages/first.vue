@@ -60,6 +60,7 @@
 </template>
 <script>
   import first from 'service/first'
+  import EventBus from 'utilities/event-bus'
   export default {
     created () {
       first.get.bind(this)({}, (data) => {
@@ -67,7 +68,7 @@
       }, (err) => {
         this.$message.error(err)
       })
-      this.changeView('member-list')
+      // this.changeView('member-list')
     },
     data () {
       return {
@@ -96,6 +97,7 @@
         }, (err) => {
           this.$message.error(err)
         })
+        EventBus.backUrl = ''
         this.$router.replace('login')
       }
     }

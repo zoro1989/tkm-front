@@ -37,7 +37,7 @@
             message: data.resultData.resultMsg,
             type: 'success'
           })
-          this.$router.replace('first')
+          this.$router.replace('member-list')
         }, (err) => {
           this.$message.error(err)
         })
