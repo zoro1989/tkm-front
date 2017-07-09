@@ -26,9 +26,9 @@ export default {
     }
   },
   error: function (error) {
-    return function () {
-      console.log('net error')
-      error && error('网络错误')
+    return function (err) {
+      console.log(err)
+      error && error(err)
     }
   }
 }

@@ -1,4 +1,4 @@
-import responseHandler from 'httpUtils/response-handler'
+import httpHandler from 'httpUtils/http-handler'
 export default {
   submitLogin (params, success, fail) {
     let formData = new FormData()
@@ -8,7 +8,6 @@ export default {
     function makeData (originalData) {
       return originalData
     }
-    this.$http.post('/user/submitLogin.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/user/submitLogin.tkm', formData, success, fail, makeData)
   }
 }

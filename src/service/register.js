@@ -1,4 +1,4 @@
-import responseHandler from 'httpUtils/response-handler'
+import httpHandler from 'httpUtils/http-handler'
 export default {
   submitRegister (params, success, fail) {
     let formData = new FormData()
@@ -8,14 +8,12 @@ export default {
     function makeData (originalData) {
       return originalData
     }
-    this.$http.post('/user/subRegister.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/user/subRegister.tkm', formData, success, fail, makeData)
   },
   changeVCode (params, success, fail) {
     function makeData (originalData) {
       return originalData
     }
-    this.$http.get('/common/getVCode.tkm')
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.get('/common/getVCode.tkm', {}, success, fail, makeData)
   }
 }

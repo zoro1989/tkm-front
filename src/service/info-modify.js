@@ -1,7 +1,7 @@
 /**
  * Created by zhulin on 2017/6/18.
  */
-import responseHandler from 'httpUtils/response-handler'
+import httpHandler from 'httpUtils/http-handler'
 export default {
   get (params, success, fail) {
     console.log(params)
@@ -9,9 +9,9 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.get('/welcome/userinfo.tkm', {
+    httpHandler.get('/welcome/userinfo.tkm', {
       params: {}
-    }).then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    }, success, fail, makeData)
   },
   save (params, success, fail) {
     console.log(params)
@@ -23,7 +23,6 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/welcome/updateSelf.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/welcome/updateSelf.tkm', formData, success, fail, makeData)
   }
 }

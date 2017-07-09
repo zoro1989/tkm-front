@@ -1,7 +1,7 @@
 /**
  * Created by zhulin on 2017/6/18.
  */
-import responseHandler from 'httpUtils/response-handler'
+import httpHandler from 'httpUtils/http-handler'
 export default {
   save (params, success, fail) {
     console.log(params)
@@ -13,7 +13,6 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/welcome/updatePswd.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/welcome/updatePswd.tkm', formData, success, fail, makeData)
   }
 }

@@ -1,7 +1,7 @@
 /**
  * Created by zhulin on 2017/6/18.
  */
-import responseHandler from 'httpUtils/response-handler'
+import httpHandler from 'httpUtils/http-handler'
 export default {
   getList (params, success, fail) {
     console.log(params)
@@ -12,8 +12,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.post('/member/list.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/member/list.tkm', formData, success, fail, makeData)
   },
   delete (params, success, fail) {
     console.log(params)
@@ -27,8 +26,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/member/deleteUserById.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/member/deleteUserById.tkm', formData, success, fail, makeData)
   },
   deleteOne (params, success, fail) {
     console.log(params)
@@ -38,8 +36,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/member/deleteUserById.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/member/deleteUserById.tkm', formData, success, fail, makeData)
   },
   forbidden (params, success, fail) {
     console.log(params)
@@ -50,7 +47,6 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/member/forbidUserById.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/member/forbidUserById.tkm', formData, success, fail, makeData)
   }
 }

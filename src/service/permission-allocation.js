@@ -1,7 +1,7 @@
 /**
  * Created by zhulin on 2017/6/18.
  */
-import responseHandler from 'httpUtils/response-handler'
+import httpHandler from 'httpUtils/http-handler'
 export default {
   getList (params, success, fail) {
     console.log(params)
@@ -12,8 +12,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.post('/permission/allocation.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/permission/allocation.tkm', formData, success, fail, makeData)
   },
   getPermissions (params, success, fail) {
     console.log(params)
@@ -21,9 +20,9 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.get('/permission/selectPermissionById.tkm', {
+    httpHandler.get('/permission/selectPermissionById.tkm', {
       params: {id: params.id}
-    }).then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    }, success, fail, makeData)
   },
   addPermissions (params, success, fail) {
     console.log(params)
@@ -36,8 +35,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/permission/addPermission2Role.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/permission/addPermission2Role.tkm', formData, success, fail, makeData)
   },
   clearPermission (params, success, fail) {
     console.log(params)
@@ -51,7 +49,6 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/role/clearRoleByUserIds.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/role/clearRoleByUserIds.tkm', formData, success, fail, makeData)
   }
 }

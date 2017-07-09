@@ -1,7 +1,7 @@
 /**
  * Created by zhulin on 2017/6/18.
  */
-import responseHandler from 'httpUtils/response-handler'
+import httpHandler from 'httpUtils/http-handler'
 export default {
   get (params, success, fail) {
     console.log(params)
@@ -9,8 +9,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.get('/welcome/userinfo.tkm')
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.get('/welcome/userinfo.tkm', {}, success, fail, makeData)
   },
   getRoleAndPermissions (params, success, fail) {
     console.log(params)
@@ -29,7 +28,6 @@ export default {
         roles: roles
       }
     }
-    this.$http.post('/role/getPermissionTree.tkm')
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/role/getPermissionTree.tkm', {}, success, fail, makeData)
   }
 }

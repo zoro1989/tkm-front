@@ -1,7 +1,7 @@
 /**
  * Created by zhulin on 2017/6/18.
  */
-import responseHandler from 'httpUtils/response-handler'
+import httpHandler from 'httpUtils/http-handler'
 export default {
   getList (params, success, fail) {
     console.log(params)
@@ -12,8 +12,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    this.$http.post('/role/index.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/role/index.tkm', formData, success, fail, makeData)
   },
   delete (params, success, fail) {
     console.log(params)
@@ -27,8 +26,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/role/deleteRoleById.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/role/deleteRoleById.tkm', formData, success, fail, makeData)
   },
   deleteOne (params, success, fail) {
     console.log(params)
@@ -38,8 +36,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/role/deleteRoleById.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/role/deleteRoleById.tkm', formData, success, fail, makeData)
   },
   addRole (params, success, fail) {
     console.log(params)
@@ -51,7 +48,6 @@ export default {
       console.log(originalData)
       return originalData
     }
-    this.$http.post('/role/addRole.tkm', formData)
-      .then(responseHandler.success(success, fail, makeData), responseHandler.error(fail))
+    httpHandler.post('/role/addRole.tkm', formData, success, fail, makeData)
   }
 }
