@@ -2,6 +2,7 @@
  * Created by zhulin on 2017/6/18.
  */
 import httpHandler from 'httpUtils/http-handler'
+import uris from 'router/uris'
 export default {
   push (params, success, fail) {
     console.log(params)
@@ -13,6 +14,6 @@ export default {
       console.log(originalData)
       return originalData
     }
-    httpHandler.post('/push/send.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.push.send, formData, success, fail, makeData)
   }
 }

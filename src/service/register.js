@@ -1,4 +1,5 @@
 import httpHandler from 'httpUtils/http-handler'
+import uris from 'router/uris'
 export default {
   submitRegister (params, success, fail) {
     let formData = new FormData()
@@ -8,12 +9,12 @@ export default {
     function makeData (originalData) {
       return originalData
     }
-    httpHandler.post('/user/subRegister.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.user.subRegister, formData, success, fail, makeData)
   },
   changeVCode (params, success, fail) {
     function makeData (originalData) {
       return originalData
     }
-    httpHandler.get('/common/getVCode.tkm', {}, success, fail, makeData)
+    httpHandler.get.bind(this)(uris.common.getVCode, {}, success, fail, makeData)
   }
 }

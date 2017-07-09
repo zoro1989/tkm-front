@@ -2,6 +2,7 @@
  * Created by zhulin on 2017/6/18.
  */
 import httpHandler from 'httpUtils/http-handler'
+import uris from 'router/uris'
 export default {
   get (params, success, fail) {
     console.log(params)
@@ -9,7 +10,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    httpHandler.get('/welcome/userinfo.tkm', {
+    httpHandler.get.bind(this)(uris.welcome.userinfo, {
       params: {}
     }, success, fail, makeData)
   },
@@ -23,6 +24,6 @@ export default {
       console.log(originalData)
       return originalData
     }
-    httpHandler.post('/welcome/updateSelf.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.welcome.updateSelf, formData, success, fail, makeData)
   }
 }

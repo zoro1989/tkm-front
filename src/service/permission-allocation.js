@@ -2,6 +2,7 @@
  * Created by zhulin on 2017/6/18.
  */
 import httpHandler from 'httpUtils/http-handler'
+import uris from 'router/uris'
 export default {
   getList (params, success, fail) {
     console.log(params)
@@ -12,7 +13,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    httpHandler.post('/permission/allocation.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.permission.allocation, formData, success, fail, makeData)
   },
   getPermissions (params, success, fail) {
     console.log(params)
@@ -20,7 +21,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    httpHandler.get('/permission/selectPermissionById.tkm', {
+    httpHandler.get.bind(this)(uris.permission.selectPermissionById, {
       params: {id: params.id}
     }, success, fail, makeData)
   },
@@ -35,7 +36,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    httpHandler.post('/permission/addPermission2Role.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.permission.addPermission2Role, formData, success, fail, makeData)
   },
   clearPermission (params, success, fail) {
     console.log(params)
@@ -49,6 +50,6 @@ export default {
       console.log(originalData)
       return originalData
     }
-    httpHandler.post('/role/clearRoleByUserIds.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.permission.clearPermissionByRoleIds, formData, success, fail, makeData)
   }
 }

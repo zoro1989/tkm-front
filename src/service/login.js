@@ -1,4 +1,5 @@
 import httpHandler from 'httpUtils/http-handler'
+import uris from 'router/uris'
 export default {
   submitLogin (params, success, fail) {
     let formData = new FormData()
@@ -8,6 +9,6 @@ export default {
     function makeData (originalData) {
       return originalData
     }
-    httpHandler.post('/user/submitLogin.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.user.submitLogin, formData, success, fail, makeData)
   }
 }

@@ -2,6 +2,7 @@
  * Created by zhulin on 2017/6/18.
  */
 import httpHandler from 'httpUtils/http-handler'
+import uris from 'router/uris'
 export default {
   save (params, success, fail) {
     console.log(params)
@@ -13,6 +14,6 @@ export default {
       console.log(originalData)
       return originalData
     }
-    httpHandler.post('/welcome/updatePswd.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.welcome.updatePswd, formData, success, fail, makeData)
   }
 }

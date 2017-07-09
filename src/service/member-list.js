@@ -2,6 +2,7 @@
  * Created by zhulin on 2017/6/18.
  */
 import httpHandler from 'httpUtils/http-handler'
+import uris from 'router/uris'
 export default {
   getList (params, success, fail) {
     console.log(params)
@@ -12,7 +13,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    httpHandler.post('/member/list.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.member.list, formData, success, fail, makeData)
   },
   delete (params, success, fail) {
     console.log(params)
@@ -26,7 +27,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    httpHandler.post('/member/deleteUserById.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.member.deleteUserById, formData, success, fail, makeData)
   },
   deleteOne (params, success, fail) {
     console.log(params)
@@ -36,7 +37,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    httpHandler.post('/member/deleteUserById.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.member.deleteUserById, formData, success, fail, makeData)
   },
   forbidden (params, success, fail) {
     console.log(params)
@@ -47,6 +48,6 @@ export default {
       console.log(originalData)
       return originalData
     }
-    httpHandler.post('/member/forbidUserById.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.member.forbidUserById, formData, success, fail, makeData)
   }
 }

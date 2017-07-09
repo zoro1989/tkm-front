@@ -2,6 +2,7 @@
  * Created by zhulin on 2017/6/18.
  */
 import httpHandler from 'httpUtils/http-handler'
+import uris from 'router/uris'
 export default {
   get (params, success, fail) {
     console.log(params)
@@ -9,7 +10,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    httpHandler.get('/welcome/userinfo.tkm', {}, success, fail, makeData)
+    httpHandler.get.bind(this)(uris.welcome.userinfo, {}, success, fail, makeData)
   },
   getRoleAndPermissions (params, success, fail) {
     console.log(params)
@@ -28,6 +29,6 @@ export default {
         roles: roles
       }
     }
-    httpHandler.post('/role/getPermissionTree.tkm', {}, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.role.getPermissionTree, {}, success, fail, makeData)
   }
 }

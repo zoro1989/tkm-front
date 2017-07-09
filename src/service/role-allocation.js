@@ -2,6 +2,7 @@
  * Created by zhulin on 2017/6/18.
  */
 import httpHandler from 'httpUtils/http-handler'
+import uris from 'router/uris'
 export default {
   getList (params, success, fail) {
     console.log(params)
@@ -12,7 +13,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    httpHandler.post('/role/allocation.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.role.allocation, formData, success, fail, makeData)
   },
   getRoles (params, success, fail) {
     console.log(params)
@@ -20,7 +21,7 @@ export default {
       console.log(originalData)
       return originalData.resultData
     }
-    httpHandler.get('/role/selectRoleByUserId.tkm', {
+    httpHandler.get.bind(this)(uris.role.selectRoleByUserId, {
       params: {id: params.id}
     }, success, fail, makeData)
   },
@@ -35,7 +36,7 @@ export default {
       console.log(originalData)
       return originalData
     }
-    httpHandler.post('/role/addRole2User.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.role.addRole2User, formData, success, fail, makeData)
   },
   clearRole (params, success, fail) {
     console.log(params)
@@ -49,6 +50,6 @@ export default {
       console.log(originalData)
       return originalData
     }
-    httpHandler.post('/role/clearRoleByUserIds.tkm', formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.role.clearRoleByUserIds, formData, success, fail, makeData)
   }
 }

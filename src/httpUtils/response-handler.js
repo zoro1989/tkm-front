@@ -1,7 +1,7 @@
 import errorMessage from './error-message'
 export default {
-  success: function (success, fail, makeData) {
-    return function (response) {
+  success: function (success, fail, makeData, vm) {
+    return (response) => {
       console.log('request network success')
       console.log(response)
       try {
@@ -10,11 +10,11 @@ export default {
           console.log('success')
           success && success(makeData ? makeData(data) : data)
         } else if (data.resultCode === 101) {
-          this.$router.replace('login')
+          vm.$router.replace('login')
         } else if (data.resultCode === 102) {
-          this.$router.replace('first')
+          vm.$router.replace('first')
         } else if (data.resultCode === 103) {
-          this.$router.replace('first')
+          vm.$router.replace('first')
         } else {
           console.log('fail')
           fail && fail(data.errorMessage || errorMessage[data.resultCode] || '未定义错误消息' + data.resultCode, data.resultCode)
@@ -26,7 +26,7 @@ export default {
     }
   },
   error: function (error) {
-    return function (err) {
+    return (err) => {
       console.log(err)
       error && error(err)
     }
