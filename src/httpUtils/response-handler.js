@@ -20,6 +20,11 @@ export default {
         } else if (data.resultCode === 104) {
           console.log(EventBus.backUrl)
           let backUrl = EventBus.backUrl ? EventBus.backUrl : 'member-list'
+          vm.$message({
+            message: data.resultData.resultMsg,
+            type: 'success'
+          })
+          EventBus.backUrl = ''
           vm.$router.replace(backUrl)
         } else {
           console.log('fail')
