@@ -21,7 +21,7 @@ export default {
           console.log(EventBus.backUrl)
           let backUrl = EventBus.backUrl ? EventBus.backUrl : 'member-list'
           vm.$message({
-            message: data.resultData.resultMsg,
+            message: data.resultData,
             type: 'success'
           })
           EventBus.backUrl = ''
