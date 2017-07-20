@@ -2,7 +2,7 @@
   <section id="my-permission">
     <mu-list>
       <template v-for="role in roles">
-        <mu-list-item :title="role.name" toggleNested class="role-title">
+        <mu-list-item :title="role.name" toggleNested class="role-title" :open="open">
           <template v-for="permission in role.permissions">
             <mu-list-item slot="nested" :title="permission.name"/>
           </template>
@@ -24,7 +24,8 @@
     },
     data () {
       return {
-        roles: []
+        roles: [],
+        open: false
       }
     }
   }
@@ -33,10 +34,10 @@
 
 <style scoped>
   #my-permission{
-    width: 300px;
-    margin-left: 100px;
-  }
-  #my-permission .mu-list{
+    width: 60%;
+    margin: 10px auto;
+    max-height: calc(100vh - 110px);
+    overflow: auto;
     border: 1px solid rgba(0, 0, 0, 0.12);
   }
 

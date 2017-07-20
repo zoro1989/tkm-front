@@ -75,7 +75,7 @@
         selectedAll: false,
         totalCount: 1,
         pageNo: 1,
-        height: '60vh'
+        height: '70vh'
       }
     },
     watch: {
@@ -166,14 +166,20 @@
    #permission-allocation .mu-pagination{
      justify-content: flex-end;
    }
-   #permission-allocation .mu-tr .mu-th:first-child,#permission-allocation .mu-tr .mu-td:first-child{
-     width: 100px;
-   }
    #permission-allocation .mu-tr .mu-th,#permission-allocation .mu-tr .mu-td{
      white-space:pre-wrap;
-     word-break:break-all;
-     padding-top: 24px;
-     padding-bottom: 24px;
+     word-wrap:break-word;
    }
-
+   #permission-allocation .mu-tr .mu-th:first-child,#permission-allocation .mu-tr .mu-td:first-child{
+     width: 100px;
+     white-space:nowrap;
+   }
+   #permission-allocation .mu-tr .mu-th:last-child,#permission-allocation .mu-tr .mu-td:last-child{
+     width: 200px;
+     padding-left: 5px;
+     padding-right: 5px;
+   }
+   #permission-allocation .mu-table .mu-checkbox{
+     display: inline;
+   }
 </style>

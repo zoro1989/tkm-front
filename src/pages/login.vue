@@ -14,6 +14,7 @@
 </template>
 <script>
   import login from 'service/login'
+  import EventBus from 'utilities/event-bus'
   export default {
     data () {
       return {
@@ -33,11 +34,14 @@
           this.form.rememberMe = false
         }
         login.submitLogin.bind(this)({form: this.form}, (data) => {
+          console.log(EventBus.backUrl)
+          let backUrl = EventBus.backUrl ? EventBus.backUrl : 'member-list'
           this.$message({
-            message: data.resultData.resultMsg,
+            message: data.resultData,
             type: 'success'
           })
-          this.$router.replace('member-list')
+          EventBus.backUrl = ''
+          this.$router.replace(backUrl)
         }, (err) => {
           this.$message.error(err)
         })

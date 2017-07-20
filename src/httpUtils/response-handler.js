@@ -17,15 +17,6 @@ export default {
           vm.$router.replace('member-list')
         } else if (data.resultCode === 103) {
           vm.$router.replace('member-list')
-        } else if (data.resultCode === 104) {
-          console.log(EventBus.backUrl)
-          let backUrl = EventBus.backUrl ? EventBus.backUrl : 'member-list'
-          vm.$message({
-            message: data.resultData.resultMsg,
-            type: 'success'
-          })
-          EventBus.backUrl = ''
-          vm.$router.replace(backUrl)
         } else {
           console.log('fail')
           fail && fail(data.errorMessage || errorMessage[data.resultCode] || '未定义错误消息' + data.resultCode, data.resultCode)

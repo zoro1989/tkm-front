@@ -28,7 +28,7 @@
             <mu-td>{{item.createTime}}</mu-td>
             <mu-td>{{item.lastLoginTime}}</mu-td>
             <mu-td>
-              <mu-raised-button :label="item.status==1?'禁止登录':'激活登录'"  @click="forbidden(item)" secondary/>
+              <mu-raised-button :label="item.status==1?'禁止':'激活'"  @click="forbidden(item)" secondary/>
               <mu-raised-button label="删除"  @click="deleteMember(item)" backgroundColor="red"/>
             </mu-td>
           </mu-tr>
@@ -69,7 +69,7 @@
         selectedAll: false,
         totalCount: 1,
         pageNo: 1,
-        height: '60vh'
+        height: '70vh'
       }
     },
     watch: {
@@ -160,7 +160,20 @@
    #member-list .mu-pagination{
      justify-content: flex-end;
    }
-   #member-list .mu-tr .mu-th:first-child,#info-modify .mu-tr .mu-td:first-child{
-     width: 100px;
+   #member-list .mu-tr .mu-th,#member-list .mu-tr .mu-td{
+     white-space:pre-wrap;
+     word-wrap:break-word;
    }
+   #member-list .mu-tr .mu-th:first-child,#member-list .mu-tr .mu-td:first-child{
+     width: 100px;
+     white-space:nowrap;
+   }
+   #member-list .mu-tr .mu-th:last-child,#member-list .mu-tr .mu-td:last-child{
+     width: 200px;
+     padding-left: 5px;
+     padding-right: 5px;
+   }
+  #member-list .mu-table .mu-raised-button-secondary{
+    width: 50px;
+  }
 </style>

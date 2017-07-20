@@ -77,7 +77,7 @@
         selectedAll: false,
         totalCount: 1,
         pageNo: 1,
-        height: '60vh'
+        height: '70vh'
       }
     },
     watch: {
@@ -171,8 +171,18 @@
    #permission-list .mu-pagination{
      justify-content: flex-end;
    }
+   #permission-list .mu-tr .mu-th,#permission-list .mu-tr .mu-td{
+     white-space:pre-wrap;
+     word-wrap:break-word;
+   }
    #permission-list .mu-tr .mu-th:first-child,#permission-list .mu-tr .mu-td:first-child{
      width: 100px;
+     white-space:nowrap;
+   }
+   #permission-list .mu-tr .mu-th:last-child,#permission-list .mu-tr .mu-td:last-child{
+     width: 200px;
+     padding-left: 5px;
+     padding-right: 5px;
    }
 
 </style>

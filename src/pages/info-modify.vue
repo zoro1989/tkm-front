@@ -3,7 +3,9 @@
     <input type="hidden" v-model="form.id" />
     <mu-text-field label="昵称" v-model="form.nickname" labelFloat hintText="请输入昵称" ></mu-text-field>
     <mu-text-field label="Email（不准修改）" v-model="form.email" :disabled="true"></mu-text-field>
-    <mu-raised-button label="确认修改"  @click="onSubmit" primary/>
+    <section class="button-group">
+      <mu-raised-button label="确认修改"  @click="onSubmit" primary/>
+    </section>
   </section>
 </template>
 
@@ -46,7 +48,8 @@
 
 <style scoped>
    #info-modify{
-     width: 300px;
+     width: 60%;
+     margin: 0 auto;
    }
 
 </style>

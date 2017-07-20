@@ -3,7 +3,9 @@
     <mu-text-field label="原密码" v-model="form.pswd" type="password" hintText="请输入原密码" labelFloat></mu-text-field>
     <mu-text-field label="新密码" v-model="form.newPswd" type="password" hintText="请输入新密码" labelFloat></mu-text-field>
     <mu-text-field label="新密码（再输入一次）" v-model="form.reNewPswd" hintText="请再次输入新密码" type="password" labelFloat></mu-text-field>
-    <mu-raised-button label="确认修改"  @click="onSubmit" primary/>
+    <section class="button-group">
+      <mu-raised-button label="确认修改"  @click="onSubmit" primary/>
+    </section>
   </section>
 </template>
 
@@ -37,6 +39,7 @@
 
 <style scoped>
   #pwd-modify{
-    width: 300px;
+    width: 60%;
+    margin: 0 auto;
   }
 </style>

@@ -49,6 +49,7 @@
 
 <style scoped>
   #personal-data{
-    width: 300px;
+    width: 60%;
+    margin: 0 auto;
   }
 </style>
