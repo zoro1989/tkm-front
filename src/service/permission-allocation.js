@@ -11,7 +11,36 @@ export default {
     formData.append('pageNo', params.pageNo)
     function makeData (originalData) {
       console.log(originalData)
-      return originalData.resultData
+      return {
+        totalCount: originalData.resultData.totalCount,
+        rows: originalData.resultData.list.map((row) => {
+          return {
+            id: row.id,
+            selected: false,
+            columns: [
+              {
+                name: 'name',
+                value: row.name || '--'
+              },
+              {
+                name: 'type',
+                value: row.type || '--'
+              },
+              {
+                name: 'permissionNames',
+                value: row.permissionNames || '--'
+              }
+            ],
+            operations: [
+              {
+                name: '选择权限',
+                action: 'selectPermission',
+                type: 'normal'
+              }
+            ]
+          }
+        })
+      }
     }
     httpHandler.post.bind(this)(uris.permission.allocation, formData, success, fail, makeData)
   },
@@ -41,7 +70,7 @@ export default {
   clearPermission (params, success, fail) {
     console.log(params)
     let formData = new FormData()
-    params.tableData.map((row) => {
+    params.tableData.rows.map((row) => {
       if (row.selected) {
         formData.append('roleIds', row.id)
       }

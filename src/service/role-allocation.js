@@ -11,7 +11,40 @@ export default {
     formData.append('pageNo', params.pageNo)
     function makeData (originalData) {
       console.log(originalData)
-      return originalData.resultData
+      return {
+        totalCount: originalData.resultData.totalCount,
+        rows: originalData.resultData.list.map((row) => {
+          return {
+            id: row.id,
+            selected: false,
+            columns: [
+              {
+                name: 'nickname',
+                value: row.nickname || '--'
+              },
+              {
+                name: 'email',
+                value: row.email || '--'
+              },
+              {
+                name: 'status',
+                value: row.status === 1 ? '有效' : '禁止'
+              },
+              {
+                name: 'roleNames',
+                value: row.roleNames || '--'
+              }
+            ],
+            operations: [
+              {
+                name: '选择角色',
+                action: 'selectRole',
+                type: 'normal'
+              }
+            ]
+          }
+        })
+      }
     }
     httpHandler.post.bind(this)(uris.role.allocation, formData, success, fail, makeData)
   },
@@ -41,7 +74,7 @@ export default {
   clearRole (params, success, fail) {
     console.log(params)
     let formData = new FormData()
-    params.tableData.map((row) => {
+    params.tableData.rows.map((row) => {
       if (row.selected) {
         formData.append('userIds', row.id)
       }

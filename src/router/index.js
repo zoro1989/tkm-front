@@ -27,14 +27,6 @@ export default new Router({
       component: Login
     },
     {
-      path: '/login',
-      name: 'login',
-      meta: {
-        title: '登录'
-      },
-      component: Login
-    },
-    {
       path: '/register',
       name: 'register',
       meta: {

@@ -15,15 +15,6 @@
             <mu-menu-item title="退出登录" @click="logout"/>
           </mu-icon-menu>
         </mu-appbar>
-        <!--<el-menu theme="dark" :unique-opened="uniqueMenu" class="el-menu-demo" mode="horizontal">-->
-          <!--<div class="title">停车收费管理系统</div>-->
-          <!--<el-submenu index="1" style="float: right">-->
-            <!--<template slot="title">{{nickname}}</template>-->
-            <!--<el-menu-item index="1-1" @click="changeView('personal-data')">个人资料</el-menu-item>-->
-            <!--<el-menu-item index="1-2" @click="changeView('my-permission')">我的权限</el-menu-item>-->
-            <!--<el-menu-item index="1-3" @click="logout">退出登录</el-menu-item>-->
-          <!--</el-submenu>-->
-        <!--</el-menu>-->
       </mu-flexbox-item>
     </mu-flexbox>
     <mu-flexbox class="body" align="flex-start">

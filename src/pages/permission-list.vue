@@ -1,166 +1,108 @@
 <template>
   <section id="permission-list">
-    <section class="search-content">
-      <mu-text-field v-model="form.findContent" hintText="输入权限名称" ></mu-text-field>
-      <mu-raised-button label="查询"  @click="onSubmit" primary/>
-      <mu-raised-button label="增加权限"  @click="addPermission" secondary/>
-      <has-permission :permission="'permission:deletePermissionById'">
-        <mu-raised-button label="删除"  @click="deletePermissions" backgroundColor="red"/>
-      </has-permission>
-    </section>
-    <section>
-      <mu-table :fixedHeader="fixedHeader" :selectable="selectable" :showCheckbox="showCheckbox"
-                :multiSelectable="multiSelectable" :height="height" @rowClick="rowClick">
-        <mu-thead slot="header">
-          <mu-tr>
-            <mu-th><mu-checkbox v-model="selectedAll" /></mu-th>
-            <mu-th tooltip="权限名称">权限名称</mu-th>
-            <mu-th tooltip="权限url">权限url</mu-th>
-            <mu-th tooltip="操作">操作</mu-th>
-          </mu-tr>
-        </mu-thead>
-        <mu-tbody>
-          <mu-tr v-for="item,index in tableData"  :key="index" :selected="item.selected">
-            <mu-td><mu-checkbox v-model="item.selected" /></mu-td>
-            <mu-td>{{item.name}}</mu-td>
-            <mu-td>{{item.url}}</mu-td>
-            <mu-td>
-              <mu-raised-button label="删除"  @click="deletePermission(item)" backgroundColor="red"/>
-            </mu-td>
-          </mu-tr>
-        </mu-tbody>
-      </mu-table>
-      <mu-pagination :total="totalCount" :current="pageNo" @pageChange="pageChange">
-      </mu-pagination>
-      <tkm-dialog ref="dialogForm" title="添加权限" cancelLabel="取消" confirmLabel="确定">
-        <mu-text-field label="权限名称" v-model="dialogForm.name" hintText="请输入权限名称" labelFloat></mu-text-field>
-        <mu-text-field label="权限URL地址" v-model="dialogForm.url" hintText="请输入权限URL地址" labelFloat></mu-text-field>
-      </tkm-dialog>
-      <tkm-dialog ref="dialog" title="警告" cancelLabel="取消" confirmLabel="确定">
-        {{dialogMsg}}
-      </tkm-dialog>
-    </section>
+    <tkm-table :tableData="tableData"
+               :headers="headers"
+               :searchOperations="searchOperations"
+               @init-data="initData"
+               @search-operation="searchOperation"
+               @rows-operation="rowsOperation">
+    </tkm-table>
+    <tkm-dialog ref="dialogForm" title="添加权限" cancelLabel="取消" confirmLabel="确定">
+      <mu-text-field label="权限名称" v-model="dialogForm.name" hintText="请输入权限名称" labelFloat></mu-text-field>
+      <mu-text-field label="权限URL地址" v-model="dialogForm.url" hintText="请输入权限URL地址" labelFloat></mu-text-field>
+    </tkm-dialog>
+    <tkm-dialog ref="dialog" title="警告" cancelLabel="取消" confirmLabel="确定">
+      {{dialogMsg}}
+    </tkm-dialog>
   </section>
 </template>
 
 <script>
   import permissionList from 'service/permission-list'
-  import isNotEmpty from 'utilities/is-not-empty'
   import TkmDialog from 'components/tkm-dialog'
   import HasPermission from 'components/has-permission'
   import HasAnyRoles from 'components/has-any-roles'
+  import TkmTable from 'components/tkm-table'
   export default{
     components: {
       TkmDialog,
       HasPermission,
-      HasAnyRoles
-    },
-    created () {
-      this.initData()
+      HasAnyRoles,
+      TkmTable
     },
     data () {
       return {
         dialog: false,
         dialogMsg: '',
-        form: {
-          findContent: ''
-        },
         dialogForm: {
           name: '',
           url: ''
         },
         tableData: [],
-        fixedHeader: true,
-        selectable: true,
-        showCheckbox: false,
-        multiSelectable: true,
-        selectedAll: false,
-        totalCount: 1,
-        pageNo: 1,
-        height: '70vh'
-      }
-    },
-    watch: {
-      selectedAll: function (newValue, oldValue) {
-        if (isNotEmpty(newValue)) {
-          if (newValue) {
-            this.tableData.map((row) => {
-              row.selected = true
-            })
-          } else {
-            this.tableData.map((row) => {
-              row.selected = false
-            })
+        searchOperations: [
+          {
+            name: '查询',
+            action: 'onSubmit',
+            type: 'normal'
+          },
+          {
+            name: '增加权限',
+            action: 'addPermission',
+            type: 'normal'
+          },
+          {
+            name: '删除',
+            action: 'deletePermissions',
+            type: 'delete'
           }
-        }
+        ],
+        headers: [{name: '权限名称'}, {name: '权限url'}]
       }
     },
     methods: {
-      initData () {
-        permissionList.getList.bind(this)({findContent: this.form.findContent, pageNo: this.pageNo}, (data) => {
-          this.tableData = data.list.map((row) => {
-            row.selected = false
-            return row
-          })
-          this.totalCount = data.totalCount
-          this.pageNo = data.pageNo
+      initData (params, success, fail) {
+        permissionList.getList.bind(this)({findContent: params.findContent, pageNo: params.pageNo}, (data) => {
+          this.tableData = data
         }, (err) => {
-          this.$message.error(err)
+          fail(err)
         })
       },
-      onSubmit () {
-        this.initData()
-      },
-      deletePermissions () {
-        this.dialogMsg = '确认要删除这些权限吗？'
-        this.$refs.dialog.openDialog(() => {
-          permissionList.delete.bind(this)({tableData: this.tableData}, (data) => {
-            this.$message({
-              message: data.resultData,
-              type: 'success'
+      rowsOperation (action, row, success, fail) {
+        if (action === 'deletePermission') {
+          this.dialogMsg = '确认要删除这个权限吗？'
+          this.$refs.dialog.openDialog(() => {
+            permissionList.deleteOne.bind(this)({row: row}, (data) => {
+              success(data.resultData)
+            }, (err) => {
+              fail(err)
             })
-            this.initData()
-          }, (err) => {
-            this.$message.error(err)
+          }, () => {
           })
-        }, () => {
-        })
+        }
       },
-      deletePermission (row) {
-        this.dialogMsg = '确认要删除这个权限吗？'
-        this.$refs.dialog.openDialog(() => {
-          permissionList.deleteOne.bind(this)({row: row}, (data) => {
-            this.$message({
-              message: data.resultData,
-              type: 'success'
+      searchOperation (action, success, fail) {
+        if (action === 'deletePermissions') {
+          this.dialogMsg = '确认要删除这些权限吗？'
+          this.$refs.dialog.openDialog(() => {
+            permissionList.delete.bind(this)({tableData: this.tableData}, (data) => {
+              success(data.resultData)
+            }, (err) => {
+              fail(err)
             })
-            this.initData()
-          }, (err) => {
-            this.$message.error(err)
+          }, () => {
           })
-        }, () => {
-        })
-      },
-      addPermission () {
-        this.$refs.dialogForm.openDialog(() => {
-          permissionList.addPermission.bind(this)({form: this.dialogForm}, (data) => {
-            this.$message({
-              message: data.resultData,
-              type: 'success'
+        } else if (action === 'addPermission') {
+          this.$refs.dialogForm.openDialog(() => {
+            permissionList.addPermission.bind(this)({form: this.dialogForm}, (data) => {
+              success(data.resultData)
+            }, (err) => {
+              fail(err)
             })
-            this.initData()
-          }, (err) => {
-            this.$message.error(err)
+          }, () => {
           })
-        }, () => {
-        })
-      },
-      pageChange (newIndex) {
-        this.pageNo = newIndex
-        this.initData()
-      },
-      rowClick (index, tr) {
-        this.tableData[index].selected = !this.tableData[index].selected
+        } else {
+          success()
+        }
       }
     }
   }
@@ -168,21 +110,4 @@
 </script>
 
 <style scoped>
-   #permission-list .mu-pagination{
-     justify-content: flex-end;
-   }
-   #permission-list .mu-tr .mu-th,#permission-list .mu-tr .mu-td{
-     white-space:pre-wrap;
-     word-wrap:break-word;
-   }
-   #permission-list .mu-tr .mu-th:first-child,#permission-list .mu-tr .mu-td:first-child{
-     width: 100px;
-     white-space:nowrap;
-   }
-   #permission-list .mu-tr .mu-th:last-child,#permission-list .mu-tr .mu-td:last-child{
-     width: 200px;
-     padding-left: 5px;
-     padding-right: 5px;
-   }
-
 </style>

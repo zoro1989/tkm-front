@@ -11,14 +11,39 @@ export default {
     formData.append('pageNo', params.pageNo)
     function makeData (originalData) {
       console.log(originalData)
-      return originalData.resultData
+      return {
+        totalCount: originalData.resultData.totalCount,
+        rows: originalData.resultData.list.map((row) => {
+          return {
+            id: row.id,
+            selected: false,
+            columns: [
+              {
+                name: 'name',
+                value: row.name || '--'
+              },
+              {
+                name: 'url',
+                value: row.url || '--'
+              }
+            ],
+            operations: [
+              {
+                name: '删除',
+                action: 'deletePermission',
+                type: 'delete'
+              }
+            ]
+          }
+        })
+      }
     }
     httpHandler.post.bind(this)(uris.permission.index, formData, success, fail, makeData)
   },
   delete (params, success, fail) {
     console.log(params)
     let formData = new FormData()
-    params.tableData.map((row) => {
+    params.tableData.rows.map((row) => {
       if (row.selected) {
         formData.append('ids', row.id)
       }
