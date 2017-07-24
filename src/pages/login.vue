@@ -56,6 +56,7 @@
   #login{
     width: 300px;
     margin: 0 auto;
+    text-align: center;
   }
   #login .rememberMe{
     text-align: left;
