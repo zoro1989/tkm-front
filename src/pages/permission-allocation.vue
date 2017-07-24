@@ -47,8 +47,7 @@
           },
           {
             name: '清空用户权限',
-            action: 'clearPermission',
-            type: 'delete'
+            action: 'clearPermission'
           }
         ],
         headers: [{name: '角色名称'}, {name: '角色类型'}, {name: '拥有的权限'}],

@@ -3,7 +3,7 @@
     <section class="search-content">
       <mu-text-field v-model="form.findContent" hintText="请输入搜索关键字" ></mu-text-field>
       <template v-for="operation in searchOperations">
-        <mu-raised-button :label="operation.name"  @click="searchOptHandler(operation.action)" :backgroundColor="operation.type==='delete'?'red':'orange'"/>
+        <mu-raised-button :label="operation.name"  @click="searchOptHandler(operation.action)" :backgroundColor="operation.color"/>
       </template>
     </section>
     <mu-table :fixedHeader="fixedHeader" :selectable="selectable" :showCheckbox="showCheckbox"
@@ -40,6 +40,16 @@
   import isNotEmpty from 'utilities/is-not-empty'
   export default{
     created () {
+      this.searchOperations.map((opt) => {
+        if (opt.type === 'normal') {
+          opt.color = 'orange'
+        } else if (opt.type === 'delete') {
+          opt.color = 'red'
+        } else {
+          opt.color = 'pinkA200'
+        }
+        return opt
+      })
       this.loadTable()
     },
     props: {
@@ -133,10 +143,14 @@
 </script>
 
 <style scoped>
+  #tkm-table {
+    min-width: 1024px;
+  }
   #tkm-table .mu-pagination{
     justify-content: flex-end;
   }
   #tkm-table .mu-tr .mu-th,#tkm-table .mu-tr .mu-td{
+    min-width: 150px;
     white-space:pre-wrap;
     word-wrap:break-word;
   }

@@ -43,8 +43,7 @@
           },
           {
             name: '增加角色',
-            action: 'addRole',
-            type: 'normal'
+            action: 'addRole'
           },
           {
             name: '删除',

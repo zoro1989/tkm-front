@@ -44,8 +44,7 @@
           },
           {
             name: '清空用户角色',
-            action: 'clearRole',
-            type: 'delete'
+            action: 'clearRole'
           }
         ],
         roles: [],

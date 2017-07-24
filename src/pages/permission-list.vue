@@ -47,8 +47,7 @@
           },
           {
             name: '增加权限',
-            action: 'addPermission',
-            type: 'normal'
+            action: 'addPermission'
           },
           {
             name: '删除',

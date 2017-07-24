@@ -1,22 +1,33 @@
 <template>
   <section id="first">
-    <mu-flexbox justify="flex-start" align="center" class="header">
-      <mu-flexbox-item>
-        <mu-appbar title="停车收费管理系统">
-          <mu-icon-button icon="menu" slot="left" @click="toggleMenuShow"/>
-          <mu-flat-button :label="nickname" slot="right"/>
-          <mu-icon-menu
-            slot="right"
-            icon="expand_more"
-            :anchorOrigin="leftTop"
-            :targetOrigin="leftTop">
-            <mu-menu-item title="个人资料" @click="changeView('personal-data')" />
-            <mu-menu-item title="我的权限" @click="changeView('my-permission')" />
-            <mu-menu-item title="退出登录" @click="logout"/>
-          </mu-icon-menu>
-        </mu-appbar>
-      </mu-flexbox-item>
-    </mu-flexbox>
+    <section>
+      <mu-appbar title="停车收费管理系统" class="menuTitle">
+        <mu-icon-button icon="menu" slot="left" @click="toggleMenuShow"/>
+        <mu-flat-button :label="nickname" slot="right"/>
+        <mu-icon-menu
+          slot="right"
+          icon="expand_more"
+          :anchorOrigin="leftTop"
+          :targetOrigin="leftTop">
+          <mu-menu-item title="个人资料" @click="changeView('personal-data')" />
+          <mu-menu-item title="我的权限" @click="changeView('my-permission')" />
+          <mu-menu-item title="退出登录" @click="logout"/>
+        </mu-icon-menu>
+      </mu-appbar>
+      <mu-appbar title="停车收费管理系统" class="drawerTitle" >
+        <mu-icon-button icon="menu" slot="left" @click="toggleDrawerShow"/>
+        <mu-flat-button :label="nickname" slot="right"/>
+        <mu-icon-menu
+          slot="right"
+          icon="expand_more"
+          :anchorOrigin="leftTop"
+          :targetOrigin="leftTop">
+          <mu-menu-item title="个人资料" @click="changeView('personal-data')" />
+          <mu-menu-item title="我的权限" @click="changeView('my-permission')" />
+          <mu-menu-item title="退出登录" @click="logout"/>
+        </mu-icon-menu>
+      </mu-appbar>
+    </section>
     <mu-flexbox class="body" align="flex-start">
       <transition name="slide-fade">
         <mu-flexbox-item grow="1" class="menu" v-show="isShowMenu">
@@ -110,6 +121,8 @@
     methods: {
       toggleMenuShow () {
         this.isShowMenu = !this.isShowMenu
+      },
+      toggleDrawerShow () {
         this.drawerOpen = true
       },
       changeView (route) {
@@ -150,6 +163,7 @@
     margin-top: 5px;
   }
   #first .body{
+    overflow: auto;
     margin-top: 5px;
     min-height: calc(100vh - 50px);
   }
@@ -162,6 +176,10 @@
     display: none;
     background-color: #EEF1F6;
   }
+
+  #first .drawerTitle {
+    display: none;
+  }
   @media screen and (max-width: 1024px) {
     #first .body .menu{
       display: none;
@@ -169,8 +187,11 @@
     #first .drawer {
       display: block;
     }
-    .mu-overlay {
-      display: block;
+    #first .menuTitle {
+      display: none;
+    }
+    #first .drawerTitle {
+      display: flex;
     }
   }
   /* 可以设置不同的进入和离开动画 */
