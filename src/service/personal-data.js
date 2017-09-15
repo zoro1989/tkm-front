@@ -8,7 +8,7 @@ export default {
     console.log(params)
     function makeData (originalData) {
       console.log(originalData)
-      return originalData.resultData
+      return originalData.data
     }
     httpHandler.get.bind(this)(uris.welcome.userinfo, {}, success, fail, makeData)
   },
@@ -18,7 +18,7 @@ export default {
       console.log(originalData)
       let permissions = []
       let roles = []
-      originalData.resultData.map((role) => {
+      originalData.data.map((role) => {
         roles.push(role.type)
         role.permissions.map((permission) => {
           permissions.push(permission.url)

@@ -8,8 +8,8 @@ export default {
     console.log(params)
     function makeData (originalData) {
       console.log(originalData)
-      return originalData.resultData
+      return originalData.data
     }
-    httpHandler.post.bind(this)(uris.role.getPermissionTree, {}, success, fail, makeData)
+    httpHandler.get.bind(this)(uris.role.getPermissionTree, {}, success, fail, makeData)
   }
 }

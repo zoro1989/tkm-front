@@ -12,8 +12,8 @@ export default {
     function makeData (originalData) {
       console.log(originalData)
       return {
-        totalCount: originalData.resultData.totalCount,
-        rows: originalData.resultData.list.map((row) => {
+        totalCount: originalData.data.total,
+        rows: originalData.data.list.map((row) => {
           return {
             id: row.id,
             selected: false,
@@ -48,7 +48,7 @@ export default {
     console.log(params)
     function makeData (originalData) {
       console.log(originalData)
-      return originalData.resultData
+      return originalData.data
     }
     httpHandler.get.bind(this)(uris.permission.selectPermissionById, {
       params: {id: params.id}

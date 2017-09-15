@@ -10,10 +10,10 @@ export default {
     formData.append('findContent', params.findContent)
     formData.append('pageNo', params.pageNo)
     function makeData (originalData) {
-      console.log(originalData)
+      co      　　　nsole.log(originalData)
       return {
-        totalCount: originalData.resultData.totalCount,
-        rows: originalData.resultData.list.map((row) => {
+        totalCount: originalData.data.total,
+        rows: originalData.data.list.map((row) => {
           return {
             id: row.id,
             selected: false,

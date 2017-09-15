@@ -8,7 +8,7 @@ export default {
     console.log(params)
     function makeData (originalData) {
       console.log(originalData)
-      return originalData.resultData
+      return originalData.data
     }
     httpHandler.get.bind(this)(uris.welcome.userinfo, {
       params: {}
