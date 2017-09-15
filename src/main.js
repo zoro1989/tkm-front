@@ -9,6 +9,18 @@ import 'muse-ui/dist/muse-ui.css'
 import router from './router'
 import VueResource from 'vue-resource'
 import VueQuillEditor from 'vue-quill-editor'
+import 'babel-polyfill'
+import fastclick from 'fastclick'
+import vueLazyload from 'vue-lazyload'
+
+fastclick.attach(document.body)
+Vue.use(vueLazyload, {
+  preLoad: 1.3,
+  error: require('common/images/default.png'),
+  loading: require('common/images/default.png'),
+  attempt: 1
+})
+
 Vue.use(ElementUI)
 Vue.use(MuseUI)
 Vue.use(VueResource)

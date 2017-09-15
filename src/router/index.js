@@ -1,20 +1,35 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import PersonalData from '@/pages/personal-data'
-import InfoModify from '@/pages/info-modify'
-import PdwModify from '@/pages/pdw-modify'
-import MyPermission from '@/pages/my-permission'
-import MessagePush from '@/pages/message-push'
-import MemberList from '@/pages/member-list'
-import RoleList from '@/pages/role-list'
-import RoleAllocation from '@/pages/role-allocation'
-import PermissionList from '@/pages/permission-list'
-import PermissionAllocation from '@/pages/permission-allocation'
-import PointsList from '@/pages/points-list'
-import Login from '@/pages/login'
-import Register from '@/pages/register'
-import First from '@/pages/first'
 
+// import PersonalData from '@/pages/personal-data'
+// import InfoModify from '@/pages/info-modify'
+// import PdwModify from '@/pages/pdw-modify'
+// import MyPermission from '@/pages/my-permission'
+// import MessagePush from '@/pages/message-push'
+// import MemberList from '@/pages/member-list'
+// import RoleList from '@/pages/role-list'
+// import RoleAllocation from '@/pages/role-allocation'
+// import PermissionList from '@/pages/permission-list'
+// import PermissionAllocation from '@/pages/permission-allocation'
+// import PointsList from '@/pages/points-list'
+// import Login from '@/pages/login'
+// import Register from '@/pages/register'
+// import First from '@/pages/first'
+
+const PersonalData = resolve => require(['@/pages/personal-data'], resolve)
+const InfoModify = resolve => require(['@/pages/info-modify'], resolve)
+const PdwModify = resolve => require(['@/pages/pdw-modify'], resolve)
+const MyPermission = resolve => require(['@/pages/my-permission'], resolve)
+const MessagePush = resolve => require(['@/pages/message-push'], resolve)
+const MemberList = resolve => require(['@/pages/member-list'], resolve)
+const RoleList = resolve => require(['@/pages/role-list'], resolve)
+const RoleAllocation = resolve => require(['@/pages/role-allocation'], resolve)
+const PermissionList = resolve => require(['@/pages/permission-list'], resolve)
+const PermissionAllocation = resolve => require(['@/pages/permission-allocation'], resolve)
+const PointsList = resolve => require(['@/pages/points-list'], resolve)
+const Login = resolve => require(['@/pages/login'], resolve)
+const Register = resolve => require(['@/pages/register'], resolve)
+const First = resolve => require(['@/pages/first'], resolve)
 Vue.use(Router)
 
 export default new Router({
