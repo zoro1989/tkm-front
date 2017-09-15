@@ -73,7 +73,7 @@
             })
             this.$refs.dialogForm.openDialog(() => {
               roleAllocation.addRoles.bind(this)({roleIds: this.roleIds, userId: row.id}, (data) => {
-                success(data.resultData)
+                success(data.message)
               }, (err) => {
                 fail(err)
               })
@@ -89,7 +89,7 @@
           this.dialogMsg = '确认要清空这些用户的角色吗？'
           this.$refs.dialog.openDialog(() => {
             roleAllocation.clearRole.bind(this)({tableData: this.tableData}, (data) => {
-              success(data.resultData)
+              success(data.message)
             }, (err) => {
               fail(err)
             })

@@ -37,7 +37,7 @@
           console.log(EventBus.backUrl)
           let backUrl = EventBus.backUrl ? EventBus.backUrl : 'member-list'
           this.$message({
-            message: data.resultData,
+            message: data.message,
             type: 'success'
           })
           EventBus.backUrl = ''

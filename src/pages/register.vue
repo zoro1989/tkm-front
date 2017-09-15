@@ -36,7 +36,7 @@
       onRegister () {
         register.submitRegister.bind(this)({form: this.form}, (data) => {
           this.$message({
-            message: data.resultData,
+            message: data.message,
             type: 'success'
           })
           this.$router.replace('member-list')

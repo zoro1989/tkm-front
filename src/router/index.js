@@ -24,6 +24,14 @@ export default new Router({
       meta: {
         title: '登录'
       },
+      redirect: '/login'
+    },
+    {
+      path: '/login',
+      name: 'login',
+      meta: {
+        title: '登录'
+      },
       component: Login
     },
     {

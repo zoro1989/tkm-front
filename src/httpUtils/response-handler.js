@@ -7,19 +7,19 @@ export default {
       console.log(response)
       try {
         let data = typeof response.data === 'object' ? response.data : JSON.parse(response.data)
-        if (data.resultCode === 100) {
+        if (data.code === 200) {
           console.log('success')
           success && success(makeData ? makeData(data) : data)
-        } else if (data.resultCode === 101) {
+        } else if (data.code === 101) {
           EventBus.backUrl = vm.$route.path
           vm.$router.replace('login')
-        } else if (data.resultCode === 102) {
+        } else if (data.code === 102) {
           vm.$router.replace('member-list')
-        } else if (data.resultCode === 103) {
+        } else if (data.code === 103) {
           vm.$router.replace('member-list')
         } else {
           console.log('fail')
-          fail && fail(data.errorMessage || errorMessage[data.resultCode] || '未定义错误消息' + data.resultCode, data.resultCode)
+          fail && fail(data.errorMessage || errorMessage[data.code] || '未定义错误消息' + data.code, data.code)
         }
       } catch (e) {
         console.log('JSON解析异常')

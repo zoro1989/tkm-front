@@ -76,7 +76,7 @@
             })
             this.$refs.dialogForm.openDialog(() => {
               permissionAllocation.addPermissions.bind(this)({permissionIds: this.permissionIds, roleId: row.id}, (data) => {
-                success(data.resultData)
+                success(data.message)
               }, (err) => {
                 fail(err)
               })
@@ -94,7 +94,7 @@
           this.dialogMsg = '确认要清空这些用户的权限吗？'
           this.$refs.dialog.openDialog(() => {
             permissionAllocation.clearPermission.bind(this)({tableData: this.tableData}, (data) => {
-              success(data.resultData)
+              success(data.message)
             }, (err) => {
               fail(err)
             })

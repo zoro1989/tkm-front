@@ -53,7 +53,7 @@
       rowsOperation (action, row, success, fail) {
         if (action === 'forbidden') {
           memberList.forbidden.bind(this)({row: row}, (data) => {
-            success(data.resultData)
+            success(data.message)
           }, (err) => {
             fail(err)
           })
@@ -61,7 +61,7 @@
           this.dialogMsg = '确认要删除这个用户吗？'
           this.$refs.dialog.openDialog(() => {
             memberList.deleteOne.bind(this)({row: row}, (data) => {
-              success(data.resultData)
+              success(data.message)
             }, (err) => {
               fail(err)
             })
@@ -76,7 +76,7 @@
           this.dialogMsg = '确认要删除这些用户吗？'
           this.$refs.dialog.openDialog(() => {
             memberList.delete.bind(this)({tableData: this.tableData}, (data) => {
-              success(data.resultData)
+              success(data.message)
             }, (err) => {
               fail(err)
             })

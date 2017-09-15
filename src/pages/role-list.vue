@@ -67,7 +67,7 @@
           this.dialogMsg = '确认要删除这个角色吗？'
           this.$refs.dialog.openDialog(() => {
             roleList.deleteOne.bind(this)({row: row}, (data) => {
-              success(data.resultData)
+              success(data.message)
             }, (err) => {
               fail(err)
             })
@@ -80,7 +80,7 @@
           this.dialogMsg = '确认要删除这些角色吗？'
           this.$refs.dialog.openDialog(() => {
             roleList.delete.bind(this)({tableData: this.tableData}, (data) => {
-              success(data.resultData)
+              success(data.message)
             }, (err) => {
               fail(err)
             })
@@ -89,7 +89,7 @@
         } else if (action === 'addRole') {
           this.$refs.dialogForm.openDialog(() => {
             roleList.addRole.bind(this)({form: this.dialogForm}, (data) => {
-              success(data.resultData)
+              success(data.message)
             }, (err) => {
               fail(err)
             })

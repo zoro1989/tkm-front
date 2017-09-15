@@ -71,7 +71,7 @@
           this.dialogMsg = '确认要删除这个权限吗？'
           this.$refs.dialog.openDialog(() => {
             permissionList.deleteOne.bind(this)({row: row}, (data) => {
-              success(data.resultData)
+              success(data.message)
             }, (err) => {
               fail(err)
             })
@@ -84,7 +84,7 @@
           this.dialogMsg = '确认要删除这些权限吗？'
           this.$refs.dialog.openDialog(() => {
             permissionList.delete.bind(this)({tableData: this.tableData}, (data) => {
-              success(data.resultData)
+              success(data.message)
             }, (err) => {
               fail(err)
             })
@@ -93,7 +93,7 @@
         } else if (action === 'addPermission') {
           this.$refs.dialogForm.openDialog(() => {
             permissionList.addPermission.bind(this)({form: this.dialogForm}, (data) => {
-              success(data.resultData)
+              success(data.message)
             }, (err) => {
               fail(err)
             })
