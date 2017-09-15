@@ -8,13 +8,12 @@ import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import router from './router'
 import VueResource from 'vue-resource'
-
+import VueQuillEditor from 'vue-quill-editor'
 Vue.use(ElementUI)
 Vue.use(MuseUI)
 Vue.use(VueResource)
-
+Vue.use(VueQuillEditor)
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

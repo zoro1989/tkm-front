@@ -41,6 +41,12 @@ const uris = {
   },
   common: {
     getVCode: '/common/getVCode.tkm'
+  },
+  points: {
+    list: '/points/list.tkm',
+    addPoint: '/points/addPoint.tkm',
+    deletePointByIds: '/points/deletePointByIds.tkm',
+    selectPointById: '/points/selectPointById.tkm'
   }
 }
 export default uris

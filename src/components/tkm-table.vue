@@ -19,15 +19,22 @@
       </mu-thead>
       <mu-tbody>
         <mu-tr v-for="row,index in tableData.rows"  :key="index" :selected="row.selected">
-          <mu-td><mu-checkbox v-model="row.selected" /></mu-td>
-          <template v-for="column in row.columns">
-            <mu-td>{{column.value}}</mu-td>
+          <template v-if="row.section">
+            <mu-td></mu-td>
+            <mu-td>{{row.section}}</mu-td>
+            <mu-td></mu-td>
           </template>
-          <mu-td>
-            <template v-for="operation in row.operations">
-              <mu-raised-button :label="operation.name"  @click="optHandler(operation.action, row)" :backgroundColor="operation.type==='delete'?'red':'pinkA200'"/>
+          <template v-if="!row.section">
+            <mu-td><mu-checkbox v-model="row.selected" /></mu-td>
+            <template v-for="column in row.columns">
+              <mu-td>{{column.value}}</mu-td>
             </template>
-          </mu-td>
+            <mu-td>
+              <template v-for="operation in row.operations">
+                <mu-raised-button :label="operation.name"  @click="optHandler(operation.action, row)" :backgroundColor="operation.type==='delete'?'red':'pinkA200'"/>
+              </template>
+            </mu-td>
+          </template>
         </mu-tr>
       </mu-tbody>
     </mu-table>

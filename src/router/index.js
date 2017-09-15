@@ -10,6 +10,7 @@ import RoleList from '@/pages/role-list'
 import RoleAllocation from '@/pages/role-allocation'
 import PermissionList from '@/pages/permission-list'
 import PermissionAllocation from '@/pages/permission-allocation'
+import PointsList from '@/pages/points-list'
 import Login from '@/pages/login'
 import Register from '@/pages/register'
 import First from '@/pages/first'
@@ -129,6 +130,14 @@ export default new Router({
             title: '权限分配'
           },
           component: PermissionAllocation
+        },
+        {
+          path: '/points-list',
+          name: 'points-list',
+          meta: {
+            title: '知识点配置'
+          },
+          component: PointsList
         }
       ]
     }
