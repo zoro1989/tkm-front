@@ -1,23 +1,24 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
+import './settings/theme/index.css'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
+import './settings/common.css'
 import router from './router'
 import VueResource from 'vue-resource'
 import VueQuillEditor from 'vue-quill-editor'
-import 'babel-polyfill'
 import fastclick from 'fastclick'
 import vueLazyload from 'vue-lazyload'
 
 fastclick.attach(document.body)
 Vue.use(vueLazyload, {
   preLoad: 1.3,
-  error: require('common/images/default.png'),
-  loading: require('common/images/default.png'),
+  error: require('assets/default.png'),
+  loading: require('assets/default.png'),
   attempt: 1
 })
 

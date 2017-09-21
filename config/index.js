@@ -28,14 +28,14 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/user':{target:'http://localhost:3339',changeOrigin:true},
-      '/welcome':{target:'http://localhost:3339',changeOrigin:true},
-      '/member':{target:'http://localhost:3339',changeOrigin:true},
-      '/push':{target:'http://localhost:3339',changeOrigin:true},
-      '/permission':{target:'http://localhost:3339',changeOrigin:true},
-      '/role':{target:'http://localhost:3339',changeOrigin:true},
-      '/common':{target:'http://localhost:3339',changeOrigin:true},
-      '/points':{target:'http://localhost:3339',changeOrigin:true}
+      '/user':{target:'http://localhost:8080',changeOrigin:true},
+      '/welcome':{target:'http://localhost:8080',changeOrigin:true},
+      '/member':{target:'http://localhost:8080',changeOrigin:true},
+      '/push':{target:'http://localhost:8080',changeOrigin:true},
+      '/permission':{target:'http://localhost:8080',changeOrigin:true},
+      '/role':{target:'http://localhost:8080',changeOrigin:true},
+      '/common':{target:'http://localhost:8080',changeOrigin:true},
+      '/points':{target:'http://localhost:8080',changeOrigin:true}
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

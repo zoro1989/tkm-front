@@ -22,10 +22,12 @@
       close () {
         this.open = false
         this.closeHandler()
+        this.closeHandler = null
       },
       confirm () {
         this.open = false
         this.confirmHandler()
+        this.confirmHandler = null
       },
       openDialog (confirm, close) {
         this.open = true

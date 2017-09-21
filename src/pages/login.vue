@@ -7,15 +7,19 @@
       <mu-checkbox label="记住我" v-model="isRememberMe"></mu-checkbox>
     </section>
     <section>
-      <mu-raised-button label="登录"  @click="onSubmit" primary/>
-      <mu-raised-button label="注册"  @click="onRegister" secondary/>
+      <mu-raised-button label="登录" @click="onSubmit" primary/>
+      <mu-raised-button label="注册" @click="onRegister" secondary/>
     </section>
   </section>
 </template>
 <script>
   import login from 'service/login'
   import EventBus from 'utilities/event-bus'
+  import {Loading} from 'element-ui'
   export default {
+    components: {
+      Loading
+    },
     data () {
       return {
         form: {
@@ -23,7 +27,8 @@
           pswd: '',
           rememberMe: ''
         },
-        isRememberMe: []
+        isRememberMe: [],
+        loadingClass: 'loading'
       }
     },
     methods: {
@@ -33,15 +38,17 @@
         } else {
           this.form.rememberMe = false
         }
+        let loadingInstance = Loading.service({fullscreen: true, text: '拼命加载中'})
         login.submitLogin.bind(this)({form: this.form}, (data) => {
-          console.log(EventBus.backUrl)
           let backUrl = EventBus.backUrl ? EventBus.backUrl : 'member-list'
+          console.log(backUrl)
           this.$message({
             message: data.message,
             type: 'success'
           })
           EventBus.backUrl = ''
           this.$router.replace(backUrl)
+          loadingInstance.close()
         }, (err) => {
           this.$message.error(err)
         })
@@ -53,15 +60,17 @@
   }
 </script>
 <style scoped>
-  #login{
+  #login {
     width: 300px;
     margin: 0 auto;
     text-align: center;
   }
-  #login .rememberMe{
+
+  #login .rememberMe {
     text-align: left;
   }
-  #login .rememberMe .mu-checkbox{
+
+  #login .rememberMe .mu-checkbox {
     margin-left: 20px;
   }
 </style>
