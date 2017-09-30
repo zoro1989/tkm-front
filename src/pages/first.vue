@@ -1,7 +1,7 @@
 <template>
   <section id="first">
     <section>
-      <mu-appbar title="停车收费管理系统" class="menuTitle">
+      <mu-appbar title="TKMSYS" class="menuTitle">
         <mu-icon-button icon="menu" slot="left" @click="toggleMenuShow"/>
         <mu-flat-button :label="nickname" slot="right"/>
         <mu-icon-menu
@@ -42,7 +42,7 @@
             <el-submenu index="2">
               <template slot="title"><i class="el-icon-message"></i>推送中心</template>
               <el-menu-item index="2-1" @click="changeView('message-push')">消息推送</el-menu-item>
-              <el-menu-item index="2-2" @click="changeView('points-list')">知识点配置</el-menu-item>
+              <el-menu-item index="2-2" @click="changeView('points')">知识点配置</el-menu-item>
             </el-submenu>
             <el-submenu index="3">
               <template slot="title"><i class="el-icon-share"></i>用户中心</template>

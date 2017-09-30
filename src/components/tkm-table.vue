@@ -18,13 +18,15 @@
         </mu-tr>
       </mu-thead>
       <mu-tbody>
-        <mu-tr v-for="row,index in tableData.rows"  :key="index" :selected="row.selected">
-          <template v-if="row.section">
+        <mu-tr v-for="row,index in tableData.rows"  :key="index" :selected="row.selected" :class="{'row-section':row.sections}">
+          <template v-if="row.sections">
             <mu-td></mu-td>
-            <mu-td>{{row.section}}</mu-td>
+            <template v-for="section in row.sections">
+              <mu-td>{{section.value}}</mu-td>
+            </template>
             <mu-td></mu-td>
           </template>
-          <template v-if="!row.section">
+          <template v-if="!row.sections">
             <mu-td><mu-checkbox v-model="row.selected" /></mu-td>
             <template v-for="column in row.columns">
               <mu-td>{{column.value}}</mu-td>
@@ -152,6 +154,9 @@
 <style scoped>
   #tkm-table {
     min-width: 1024px;
+  }
+  #tkm-table .row-section {
+    background-color: rgba(255,152,0,0.1);
   }
   #tkm-table .mu-pagination{
     justify-content: flex-end;

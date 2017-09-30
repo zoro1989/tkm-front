@@ -1,5 +1,5 @@
 <template>
-  <mu-dialog :open="open" :title="title" @close="close">
+  <mu-dialog ref="mu-dialog" :open="open" :title="title" @close="close">
     <slot>确定吗？</slot>
     <mu-flat-button slot="actions" @click="close" primary :label="cancelLabel"/>
     <mu-flat-button slot="actions" primary @click="confirm" :label="confirmLabel"/>

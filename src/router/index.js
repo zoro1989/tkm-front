@@ -33,6 +33,7 @@ const First = resolve => require(['@/pages/first'], resolve)
 Vue.use(Router)
 
 export default new Router({
+  // mode: 'history',
   routes: [
     {
       path: '/',
@@ -147,8 +148,8 @@ export default new Router({
           component: PermissionAllocation
         },
         {
-          path: '/points-list',
-          name: 'points-list',
+          path: '/points',
+          name: 'points',
           meta: {
             title: '知识点配置'
           },

@@ -9,7 +9,16 @@ function _normarlizePoints (list) {
     ret.push({
       id: row.id,
       selected: false,
-      section: row.title
+      sections: [
+        {
+          name: 'title',
+          value: row.title || '--'
+        },
+        {
+          name: 'pOrder',
+          value: row.pOrder || '0'
+        }
+      ]
     })
     row.items.map((item) => {
       ret.push({
@@ -19,6 +28,10 @@ function _normarlizePoints (list) {
           {
             name: 'title',
             value: item.title || '--'
+          },
+          {
+            name: 'pOrder',
+            value: item.pOrder || '--'
           }
         ],
         operations: [
@@ -89,16 +102,36 @@ export default {
       params: {id: params.row.id}
     }, success, fail, makeData)
   },
+  getParentPoints (params, success, fail) {
+    console.log(params)
+    function makeData (originalData) {
+      console.log(originalData)
+      return originalData.data
+    }
+    httpHandler.get.bind(this)(uris.points.selectParentPoints, {}, success, fail, makeData)
+  },
   save (params, success, fail) {
     console.log(params)
     let formData = new FormData()
     formData.append('id', params.row.id)
-    formData.append('title', params.row.columns[0].value)
+    formData.append('title', params.row.title)
     formData.append('detail', params.row.detail)
+    formData.append('parentId', params.row.parentId)
+    formData.append('pOrder', params.row.pOrder)
     function makeData (originalData) {
       console.log(originalData)
       return originalData
     }
     httpHandler.post.bind(this)(uris.points.addPoint, formData, success, fail, makeData)
+  },
+  uploadImage (params, success, fail) {
+    let formData = new FormData()
+    formData.append('image', params.image)
+    formData.append('pointId', params.pointId)
+    function makeData (originalData) {
+      console.log(originalData)
+      return originalData.data
+    }
+    httpHandler.post.bind(this)(uris.points.uploadImage, formData, success, fail, makeData)
   }
 }
