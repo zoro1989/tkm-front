@@ -82,6 +82,12 @@
       }
     },
     watch: {
+      '$route' (to, from) {
+        // 对路由变化作出响应...
+        if (to.name === 'points') {
+          this.routeChange(to)
+        }
+      },
       selectedAll: function (newValue, oldValue) {
         if (isNotEmpty(newValue)) {
           if (newValue) {
@@ -97,6 +103,15 @@
       }
     },
     methods: {
+      routeChange (to) {
+        let success = (msg) => {
+          this.showSuccess(msg)
+        }
+        let fail = (err) => {
+          this.showError(err)
+        }
+        this.$emit('route-change', { pageNo: this.pageNo, findContent: this.form.findContent }, to, success, fail)
+      },
       loadTable () {
         let success = (msg) => {
           this.showSuccess(msg)

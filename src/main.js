@@ -9,8 +9,12 @@ import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import './settings/common.css'
 import router from './router'
-import VueResource from 'vue-resource'
+// import VueResource from 'vue-resource'
 import VueQuillEditor from 'vue-quill-editor'
+// require styles
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 import fastclick from 'fastclick'
 import vueLazyload from 'vue-lazyload'
 
@@ -24,8 +28,8 @@ Vue.use(vueLazyload, {
 
 Vue.use(ElementUI)
 Vue.use(MuseUI)
-Vue.use(VueResource)
-Vue.use(VueQuillEditor)
+// Vue.use(VueResource)
+Vue.use(VueQuillEditor, /* {  default global options } */)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({

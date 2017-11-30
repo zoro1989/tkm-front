@@ -3,14 +3,13 @@
  */
 import httpHandler from 'httpUtils/http-handler'
 import uris from 'router/uris'
+import timeFilter from 'filters/timestamp-to-date-time'
 export default {
   getList (params, success, fail) {
-    console.log(params)
     let formData = new FormData()
     formData.append('findContent', params.findContent)
     formData.append('pageNo', params.pageNo)
     function makeData (originalData) {
-      console.log(originalData)
       return {
         totalCount: originalData.data.total,
         rows: originalData.data.list.map((row) => {
@@ -32,11 +31,11 @@ export default {
               },
               {
                 name: 'createTime',
-                value: row.createTime || '--'
+                value: timeFilter(row.createTime) || '--'
               },
               {
                 name: 'lastLoginTime',
-                value: row.lastLoginTime || '--'
+                value: timeFilter(row.lastLoginTime) || '--'
               }
             ],
             operations: [
@@ -58,7 +57,6 @@ export default {
     httpHandler.post.bind(this)(uris.member.list, formData, success, fail, makeData)
   },
   delete (params, success, fail) {
-    console.log(params)
     let formData = new FormData()
     params.tableData.rows.map((row) => {
       if (row.selected) {
@@ -66,28 +64,23 @@ export default {
       }
     })
     function makeData (originalData) {
-      console.log(originalData)
       return originalData
     }
     httpHandler.post.bind(this)(uris.member.deleteUserById, formData, success, fail, makeData)
   },
   deleteOne (params, success, fail) {
-    console.log(params)
     let formData = new FormData()
     formData.append('ids', params.row.id)
     function makeData (originalData) {
-      console.log(originalData)
       return originalData
     }
     httpHandler.post.bind(this)(uris.member.deleteUserById, formData, success, fail, makeData)
   },
   forbidden (params, success, fail) {
-    console.log(params)
     let formData = new FormData()
     formData.append('id', params.row.id)
     formData.append('status', params.row.columns[2].value === '有效' ? 0 : 1)
     function makeData (originalData) {
-      console.log(originalData)
       return originalData
     }
     httpHandler.post.bind(this)(uris.member.forbidUserById, formData, success, fail, makeData)

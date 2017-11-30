@@ -48,7 +48,13 @@ const uris = {
     deletePointByIds: '/points/deletePointByIds.tkm',
     selectPointById: '/points/selectPointById.tkm',
     selectParentPoints: '/points/selectParentPoints.tkm',
-    uploadImage: '/points/uploadImage.tkm'
+    uploadImage: '/points/uploadImage.tkm',
+    deleteImageById: '/points/deleteImageById.tkm'
+  },
+  ebook: {
+    list: '/ebook/list.tkm',
+    selectTipById: '/ebook/selectTipById.tkm',
+    saveTip: '/tips/addTip.tkm'
   }
 }
 export default uris

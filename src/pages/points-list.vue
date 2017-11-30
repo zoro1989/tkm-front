@@ -4,6 +4,7 @@
                :headers="headers"
                :searchOperations="searchOperations"
                @init-data="initData"
+               @route-change="routeChange"
                @search-operation="searchOperation"
                @rows-operation="rowsOperation">
     </tkm-table>
@@ -20,7 +21,10 @@
       </section>
       <section class="dialog-upload">
         <div class="image-list">
-          <a class="image-link" target="_blank" v-for="item in uploadImages" :href="item.cutUrl">{{item.cutUrl}}</a>
+          <div v-for="item in uploadImages" >
+            <a class="image-link" target="_blank" :href="item.cutUrl">{{item.cutUrl}}</a>
+            <mu-float-button icon="delete" mini backgroundColor="red" @click="deleteImage(item)"/>
+          </div>
         </div>
         <div class="image-buttom">
           <mu-raised-button label="添加图片" @click="addImage" backgroundColor="orange" />
@@ -57,6 +61,7 @@
         pointId: '',
         parents: [],
         uploadImages: [],
+        type: this.$route.params.type ? this.$route.params.type : '',
         searchOperations: [
           {
             name: '查询',
@@ -76,9 +81,19 @@
         headers: [{name: '标题'}, {name: '排序'}]
       }
     },
+    mounted () {
+      this.pasteImage()
+    },
     methods: {
+      routeChange (params, to, success, fail) {
+        this.type = to.params.type
+        this.getListData(params, success, fail)
+      },
       initData (params, success, fail) {
-        pointList.getList.bind(this)({findContent: params.findContent, pageNo: params.pageNo}, (data) => {
+        this.getListData(params, success, fail)
+      },
+      getListData (params, success, fail) {
+        pointList.getList.bind(this)({findContent: params.findContent, pageNo: params.pageNo, type: this.type}, (data) => {
           this.tableData = data
         }, (err) => {
           fail(err)
@@ -86,6 +101,22 @@
       },
       addImage () {
         this.$refs.imgFile.click()
+      },
+      deleteImage (item) {
+        pointList.deleteImage.bind(this)(item, (data) => {
+          let deleteIndex = this.uploadImages.findIndex((o) => {
+            return item.id === o.id
+          })
+          if (deleteIndex >= 0) {
+            this.uploadImages.splice(deleteIndex, 1)
+          }
+          this.$message({
+            message: data.message,
+            type: 'success'
+          })
+        }, (err) => {
+          this.$message.error(err)
+        })
       },
       onImageChange (e) {
         let files = e.target.files || e.dataTransfer.files
@@ -119,7 +150,7 @@
       },
       rowsOperation (action, row, success, fail) {
         if (action === 'editPoint') {
-          pointList.editPoint.bind(this)({row: row}, (data) => {
+          pointList.editPoint.bind(this)({row: row, type: this.type}, (data) => {
             this.pointsContent = data.detail
             this.pointsTitle = data.title
             this.pointsOrder = data.pOrder
@@ -132,7 +163,7 @@
               row.title = this.pointsTitle
               row.pOrder = this.pointsOrder
               row.parentId = this.pointsParent
-              pointList.save.bind(this)({row: row}, (data) => {
+              pointList.save.bind(this)({row: row, type: this.type}, (data) => {
                 success(data.message)
               }, (err) => {
                 fail(err)
@@ -168,7 +199,7 @@
           }, () => {
           })
         } else if (action === 'addPoints') {
-          pointList.getParentPoints.bind(this)({}, (data) => {
+          pointList.getParentPoints.bind(this)({type: this.type}, (data) => {
             this.parents = data
             this.$refs.dialog.openDialog(() => {
               let newRow = {}
@@ -176,7 +207,7 @@
               newRow.title = this.pointsTitle
               newRow.pOrder = this.pointsOrder
               newRow.parentId = this.pointsParent
-              pointList.save.bind(this)({row: newRow}, (data) => {
+              pointList.save.bind(this)({row: newRow, type: this.type}, (data) => {
                 success(data.message)
               }, (err) => {
                 fail(err)
@@ -189,6 +220,25 @@
         } else {
           success()
         }
+      },
+      pasteImage () {
+        let _this = this
+        // 贴图
+        document.addEventListener('paste', function (e) {
+          if (e.clipboardData && e.clipboardData.types) {
+            if (e.clipboardData.items.length > 0) {
+              if (/^image\/\w+$/.test(e.clipboardData.items[0].type)) {
+                var blob = e.clipboardData.items[0].getAsFile()
+                pointList.uploadImage.bind(_this)({image: blob, pointId: _this.pointId}, (data) => {
+                  _this.uploadImages.push(data)
+                  _this.pointsContent += `@${data.cutUrl}@`
+                }, (err) => {
+                  _this.$message.error(err)
+                })
+              }
+            }
+          }
+        })
       }
     }
   }
@@ -204,7 +254,7 @@
     display: flex;
   }
   .dialog-upload .image-link {
-    display: block;
+    display: inline-block;
   }
   .dialog-upload .image-buttom {
     margin: 10px;

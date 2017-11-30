@@ -30,6 +30,8 @@ const PointsList = resolve => require(['@/pages/points-list'], resolve)
 const Login = resolve => require(['@/pages/login'], resolve)
 const Register = resolve => require(['@/pages/register'], resolve)
 const First = resolve => require(['@/pages/first'], resolve)
+const EbookList = resolve => require(['@/pages/ebook-list'], resolve)
+const EbookEdit = resolve => require(['@/pages/ebook-edit'], resolve)
 Vue.use(Router)
 
 export default new Router({
@@ -148,12 +150,27 @@ export default new Router({
           component: PermissionAllocation
         },
         {
-          path: '/points',
+          path: '/points/:type',
           name: 'points',
           meta: {
             title: '知识点配置'
           },
           component: PointsList
+        },
+        {
+          path: '/ebook-list',
+          name: 'ebook-list',
+          meta: {
+            title: '电子书配置'
+          },
+          component: EbookList
+        },
+        {
+          path: '/ebook-list/:tipsNo',
+          meta: {
+            title: '电子书编辑'
+          },
+          component: EbookEdit
         }
       ]
     }

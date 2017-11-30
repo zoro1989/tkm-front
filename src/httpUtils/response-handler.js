@@ -3,12 +3,9 @@ import EventBus from 'utilities/event-bus'
 export default {
   success: function (success, fail, makeData, vm) {
     return (response) => {
-      console.log('request network success')
-      console.log(response)
       try {
         let data = typeof response.data === 'object' ? response.data : JSON.parse(response.data)
         if (data.code === 200) {
-          console.log('success')
           success && success(makeData ? makeData(data) : data)
         } else if (data.code === 101) {
           EventBus.backUrl = vm.$route.path
@@ -23,7 +20,6 @@ export default {
         }
       } catch (e) {
         console.log('JSON解析异常')
-        console.log(response)
       }
     }
   },

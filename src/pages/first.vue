@@ -1,7 +1,7 @@
 <template>
   <section id="first">
     <section>
-      <mu-appbar title="TKMSYS" class="menuTitle">
+      <mu-appbar title="μ's" class="menuTitle">
         <mu-icon-button icon="menu" slot="left" @click="toggleMenuShow"/>
         <mu-flat-button :label="nickname" slot="right"/>
         <mu-icon-menu
@@ -42,7 +42,6 @@
             <el-submenu index="2">
               <template slot="title"><i class="el-icon-message"></i>推送中心</template>
               <el-menu-item index="2-1" @click="changeView('message-push')">消息推送</el-menu-item>
-              <el-menu-item index="2-2" @click="changeView('points')">知识点配置</el-menu-item>
             </el-submenu>
             <el-submenu index="3">
               <template slot="title"><i class="el-icon-share"></i>用户中心</template>
@@ -54,6 +53,19 @@
               <el-menu-item index="4-2" @click="changeView('role-allocation')">角色分配</el-menu-item>
               <el-menu-item index="4-3" @click="changeView('permission-list')">权限列表</el-menu-item>
               <el-menu-item index="4-4" @click="changeView('permission-allocation')">权限分配</el-menu-item>
+            </el-submenu>
+            <el-submenu index="5">
+              <template slot="title"><i class="el-icon-document"></i>培训手册配置</template>
+              <el-menu-item index="5-1" @click="changeView('points', 1)">HTML配置</el-menu-item>
+              <el-menu-item index="5-2" @click="changeView('points', 2)">CSS配置</el-menu-item>
+              <el-menu-item index="5-3" @click="changeView('points', 3)">JS配置</el-menu-item>
+              <el-menu-item index="5-4" @click="changeView('points', 4)">JQuery配置</el-menu-item>
+              <el-menu-item index="5-5" @click="changeView('points', 5)">VB配置</el-menu-item>
+              <el-menu-item index="5-6" @click="changeView('points', 6)">SQL配置</el-menu-item>
+            </el-submenu>
+            <el-submenu index="6">
+              <template slot="title"><i class="el-icon-document"></i>Ebook配置</template>
+              <el-menu-item index="6-1" @click="changeView('ebook-list')">vbabook配置</el-menu-item>
             </el-submenu>
           </el-menu>
         </mu-flexbox-item>
@@ -126,8 +138,12 @@
       toggleDrawerShow () {
         this.drawerOpen = true
       },
-      changeView (route) {
-        this.$router.replace(route)
+      changeView (route, type) {
+        if (type && !isNaN(type)) {
+          this.$router.replace(`/${route}/${type}`)
+        } else {
+          this.$router.replace(`/${route}`)
+        }
       },
       logout () {
         first.logout.bind(this)({}, (data) => {
@@ -139,12 +155,16 @@
           this.$message.error(err)
         })
         EventBus.backUrl = ''
-        this.$router.replace('login')
+        this.$router.replace('/login')
       }
     }
   }
 </script>
 <style scoped>
+  #first {
+    overflow: hidden;
+    zoom: 1;
+  }
   #first .header{
     height: 50px;
     background-color: #4db3ff;
@@ -166,11 +186,14 @@
   #first .body{
     overflow: auto;
     margin-top: 5px;
-    min-height: calc(100vh - 50px);
+  }
+  #first .mu-flexbox {
+    overflow: hidden;
   }
   #first .body .menu{
     background-color: #eef1f6;
-    min-height: calc(100vh - 50px);
+    margin-bottom:-3000px;
+    padding-bottom:3000px;
   }
 
   #first .drawer {

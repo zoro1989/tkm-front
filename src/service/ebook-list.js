@@ -3,6 +3,7 @@
  */
 import httpHandler from 'httpUtils/http-handler'
 import uris from 'router/uris'
+import timeFilter from 'filters/timestamp-to-date-time'
 export default {
   getList (params, success, fail) {
     let formData = new FormData()
@@ -17,29 +18,40 @@ export default {
             selected: false,
             columns: [
               {
-                name: 'name',
-                value: row.name || '--'
+                name: 'tipsNo',
+                value: row.tipsNo || '--'
               },
               {
-                name: 'url',
-                value: row.url || '--'
+                name: 'tipsTitle',
+                value: row.tipsTitle || '--'
+              },
+              {
+                name: 'updateTime',
+                value: timeFilter(row.updateTime) || '--'
+              },
+              {
+                name: 'createTime',
+                value: timeFilter(row.createTime) || '--'
               }
             ],
             operations: [
               {
                 name: '删除',
-                action: 'deletePermission',
+                action: 'deleteTip',
                 type: 'delete'
+              },
+              {
+                name: '编辑',
+                action: 'editTip'
               }
             ]
           }
         })
       }
     }
-    httpHandler.post.bind(this)(uris.permission.index, formData, success, fail, makeData)
+    httpHandler.post.bind(this)(uris.ebook.list, formData, success, fail, makeData)
   },
   delete (params, success, fail) {
-    console.log(params)
     let formData = new FormData()
     params.tableData.rows.map((row) => {
       if (row.selected) {
@@ -58,15 +70,5 @@ export default {
       return originalData
     }
     httpHandler.post.bind(this)(uris.permission.deletePermissionById, formData, success, fail, makeData)
-  },
-  addPermission (params, success, fail) {
-    let formData = new FormData()
-    for (let item in params.form) {
-      formData.append(item, params.form[item])
-    }
-    function makeData (originalData) {
-      return originalData
-    }
-    httpHandler.post.bind(this)(uris.permission.addPermission, formData, success, fail, makeData)
   }
 }

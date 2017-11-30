@@ -8,18 +8,17 @@ export default {
     function makeData (originalData) {
       return originalData.data
     }
-    httpHandler.get.bind(this)(uris.welcome.userinfo, {
-      params: {}
+    httpHandler.get.bind(this)(uris.ebook.selectTipById, {
+      params: {tipsNo: params.tipsNo}
     }, success, fail, makeData)
   },
   save (params, success, fail) {
-    let formData = new FormData()
-    for (let item in params.form) {
-      formData.append(item, params.form[item])
-    }
     function makeData (originalData) {
       return originalData
     }
-    httpHandler.post.bind(this)(uris.welcome.updateSelf, formData, success, fail, makeData)
+    delete params.tip.explainTableObj
+    delete params.tip.tipsCodeObj
+    delete params.tip.noticeCodeObj
+    httpHandler.post.bind(this)(uris.ebook.saveTip, params.tip, success, fail, makeData)
   }
 }

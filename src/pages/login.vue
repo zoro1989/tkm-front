@@ -41,7 +41,6 @@
         let loadingInstance = Loading.service({fullscreen: true, text: '拼命加载中'})
         login.submitLogin.bind(this)({form: this.form}, (data) => {
           let backUrl = EventBus.backUrl ? EventBus.backUrl : 'member-list'
-          console.log(backUrl)
           this.$message({
             message: data.message,
             type: 'success'

@@ -53,12 +53,11 @@ function _normarlizePoints (list) {
 }
 export default {
   getList (params, success, fail) {
-    console.log(params)
     let formData = new FormData()
     formData.append('findContent', params.findContent)
     formData.append('pageNo', params.pageNo)
+    formData.append('type', params.type)
     function makeData (originalData) {
-      console.log(originalData)
       let rows = _normarlizePoints(originalData.data.list)
       console.log(rows)
       return {
@@ -69,7 +68,6 @@ export default {
     httpHandler.post.bind(this)(uris.points.list, formData, success, fail, makeData)
   },
   delete (params, success, fail) {
-    console.log(params)
     let formData = new FormData()
     params.tableData.rows.map((row) => {
       if (row.selected) {
@@ -77,49 +75,43 @@ export default {
       }
     })
     function makeData (originalData) {
-      console.log(originalData)
       return originalData
     }
     httpHandler.post.bind(this)(uris.points.deletePointByIds, formData, success, fail, makeData)
   },
   deleteOne (params, success, fail) {
-    console.log(params)
     let formData = new FormData()
     formData.append('ids', params.row.id)
     function makeData (originalData) {
-      console.log(originalData)
       return originalData
     }
     httpHandler.post.bind(this)(uris.points.deletePointByIds, formData, success, fail, makeData)
   },
   editPoint (params, success, fail) {
-    console.log(params)
     function makeData (originalData) {
-      console.log(originalData)
       return originalData.data
     }
     httpHandler.get.bind(this)(uris.points.selectPointById, {
-      params: {id: params.row.id}
+      params: {id: params.row.id, type: params.type}
     }, success, fail, makeData)
   },
   getParentPoints (params, success, fail) {
-    console.log(params)
     function makeData (originalData) {
-      console.log(originalData)
       return originalData.data
     }
-    httpHandler.get.bind(this)(uris.points.selectParentPoints, {}, success, fail, makeData)
+    httpHandler.get.bind(this)(uris.points.selectParentPoints, {
+      params: {type: params.type}
+    }, success, fail, makeData)
   },
   save (params, success, fail) {
-    console.log(params)
     let formData = new FormData()
-    formData.append('id', params.row.id)
+    formData.append('id', params.row.id ? params.row.id : '')
     formData.append('title', params.row.title)
     formData.append('detail', params.row.detail)
     formData.append('parentId', params.row.parentId)
     formData.append('pOrder', params.row.pOrder)
+    formData.append('type', params.type)
     function makeData (originalData) {
-      console.log(originalData)
       return originalData
     }
     httpHandler.post.bind(this)(uris.points.addPoint, formData, success, fail, makeData)
@@ -129,9 +121,16 @@ export default {
     formData.append('image', params.image)
     formData.append('pointId', params.pointId)
     function makeData (originalData) {
-      console.log(originalData)
       return originalData.data
     }
     httpHandler.post.bind(this)(uris.points.uploadImage, formData, success, fail, makeData)
+  },
+  deleteImage (params, success, fail) {
+    let formData = new FormData()
+    formData.append('id', params.id)
+    function makeData (originalData) {
+      return originalData
+    }
+    httpHandler.post.bind(this)(uris.points.deleteImageById, formData, success, fail, makeData)
   }
 }

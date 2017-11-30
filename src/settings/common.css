@@ -185,13 +185,13 @@ a {
   color: rgba(0, 0, 0, 0.87);
 }
 .mu-flat-button-primary {
-  color: #ff9800!important;
+  color: #ff9800;
 }
 .mu-flat-button-secondary {
   color: #ff4081;
 }
 .mu-float-button {
-  background-color: #ff9800!important;
+  background-color: #ff9800;
   color: #ffffff;
 }
 .mu-float-button.disabled {
