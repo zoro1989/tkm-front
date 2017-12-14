@@ -8,17 +8,14 @@
                @search-operation="searchOperation"
                @rows-operation="rowsOperation">
     </tkm-table>
-    <tkm-dialog ref="dialog" title="知识点" cancelLabel="取消" confirmLabel="确定">
-      <section class="dialog-section">
-        <mu-text-field class="section-title" label="标题" v-model="pointsTitle"
-                       hintText="请输入知识点标题"></mu-text-field>
-        <mu-text-field class="section-order" label="排序" v-model="pointsOrder"
-                       hintText="请输入排序"></mu-text-field>
-        <mu-select-field class="section-column" v-model="pointsParent" :labelFocusClass="['label-foucs']"
-                         label="选择所属栏目">
-          <mu-menu-item v-for="item in parents" :key="item.id" :value="item.id" :title="item.title"/>
-        </mu-select-field>
-      </section>
+    <tkm-dialog ref="dialog" title="知识点" cancelLabel="取消" confirmLabel="确定" :check="check">
+      <tkm-form class="dialog-section" ref="tkmForm">
+        <tkm-input class="section-title" label="标题" :content.sync="pointsTitle" placeholder="请输入知识点标题" :notEmpty="required"></tkm-input>
+        <tkm-input class="section-order" label="排序" :content.sync="pointsOrder" placeholder="请输入排序" :notEmpty="required"></tkm-input>
+        <tkm-select class="section-column" :content.sync="pointsParent" label="选择所属栏目" :notEmpty="notRequired">
+          <mu-menu-item v-for="item in parents" :key="item.id + ''" :value="item.id + ''" :title="item.title"/>
+        </tkm-select>
+      </tkm-form>
       <section class="dialog-upload">
         <div class="image-list">
           <div v-for="item in uploadImages" >
@@ -30,8 +27,7 @@
           <mu-raised-button label="添加图片" @click="addImage" backgroundColor="orange" />
         </div>
       </section>
-      <quill-editor v-model="pointsContent">
-      </quill-editor>
+      <rich-text ref="richText" :content.sync="pointsContent" ></rich-text>
     </tkm-dialog>
     <tkm-dialog ref="dialogDelete" title="警告" cancelLabel="取消" confirmLabel="确定">
       {{dialogMsg}}
@@ -44,10 +40,18 @@
   import pointList from 'service/points-list'
   import TkmDialog from 'components/tkm-dialog'
   import TkmTable from 'components/tkm-table'
+  import RichText from 'components/rich-text'
+  import TkmInput from 'components/tkm-input'
+  import TkmForm from 'components/tkm-form'
+  import TkmSelect from 'components/tkm-select'
   export default{
     components: {
       TkmDialog,
-      TkmTable
+      TkmTable,
+      RichText,
+      TkmInput,
+      TkmForm,
+      TkmSelect
     },
     data () {
       return {
@@ -59,6 +63,9 @@
         pointsOrder: '',
         pointsParent: '',
         pointId: '',
+        check: true,
+        required: true,
+        notRequired: false,
         parents: [],
         uploadImages: [],
         type: this.$route.params.type ? this.$route.params.type : '',
@@ -153,17 +160,19 @@
           pointList.editPoint.bind(this)({row: row, type: this.type}, (data) => {
             this.pointsContent = data.detail
             this.pointsTitle = data.title
-            this.pointsOrder = data.pOrder
-            this.pointsParent = data.parentId
+            this.pointsOrder = data.pOrder + ''
+            this.pointsParent = data.parentId + ''
             this.pointId = data.id
             this.parents = data.parents
             this.uploadImages = data.cuts
             this.$refs.dialog.openDialog(() => {
-              row.detail = this.pointsContent
+//              row.detail = this.pointsContent
+              row.detail = this.$refs.richText.getContentHTML().trim()
               row.title = this.pointsTitle
               row.pOrder = this.pointsOrder
               row.parentId = this.pointsParent
-              pointList.save.bind(this)({row: row, type: this.type}, (data) => {
+              pointList.save.bind(this)({row: row, type: this.type, validate: this.$refs.tkmForm}, (data) => {
+                this.$refs.dialog.hide()
                 success(data.message)
               }, (err) => {
                 fail(err)
@@ -201,13 +210,20 @@
         } else if (action === 'addPoints') {
           pointList.getParentPoints.bind(this)({type: this.type}, (data) => {
             this.parents = data
+            this.pointsContent = ''
+            this.pointsTitle = ''
+            this.pointsOrder = ''
+            this.pointsParent = ''
+            this.uploadImages = []
             this.$refs.dialog.openDialog(() => {
               let newRow = {}
-              newRow.detail = this.pointsContent
+//              newRow.detail = this.pointsContent
+              newRow.detail = this.$refs.richText.getContentHTML().trim()
               newRow.title = this.pointsTitle
               newRow.pOrder = this.pointsOrder
               newRow.parentId = this.pointsParent
-              pointList.save.bind(this)({row: newRow, type: this.type}, (data) => {
+              pointList.save.bind(this)({row: newRow, type: this.type, validate: this.$refs.tkmForm}, (data) => {
+                this.$refs.dialog.hide()
                 success(data.message)
               }, (err) => {
                 fail(err)

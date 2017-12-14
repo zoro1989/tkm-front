@@ -14,7 +14,7 @@
           <mu-menu-item title="退出登录" @click="logout"/>
         </mu-icon-menu>
       </mu-appbar>
-      <mu-appbar title="停车收费管理系统" class="drawerTitle" >
+      <mu-appbar title="μ's" class="drawerTitle" >
         <mu-icon-button icon="menu" slot="left" @click="toggleDrawerShow"/>
         <mu-flat-button :label="nickname" slot="right"/>
         <mu-icon-menu
@@ -102,6 +102,19 @@
           <el-menu-item index="4-2" @click="changeView('role-allocation')">角色分配</el-menu-item>
           <el-menu-item index="4-3" @click="changeView('permission-list')">权限列表</el-menu-item>
           <el-menu-item index="4-4" @click="changeView('permission-allocation')">权限分配</el-menu-item>
+        </el-submenu>
+        <el-submenu index="5">
+          <template slot="title"><i class="el-icon-document"></i>培训手册配置</template>
+          <el-menu-item index="5-1" @click="changeView('points', 1)">HTML配置</el-menu-item>
+          <el-menu-item index="5-2" @click="changeView('points', 2)">CSS配置</el-menu-item>
+          <el-menu-item index="5-3" @click="changeView('points', 3)">JS配置</el-menu-item>
+          <el-menu-item index="5-4" @click="changeView('points', 4)">JQuery配置</el-menu-item>
+          <el-menu-item index="5-5" @click="changeView('points', 5)">VB配置</el-menu-item>
+          <el-menu-item index="5-6" @click="changeView('points', 6)">SQL配置</el-menu-item>
+        </el-submenu>
+        <el-submenu index="6">
+          <template slot="title"><i class="el-icon-document"></i>Ebook配置</template>
+          <el-menu-item index="6-1" @click="changeView('ebook-list')">vbabook配置</el-menu-item>
         </el-submenu>
       </el-menu>
     </mu-drawer>

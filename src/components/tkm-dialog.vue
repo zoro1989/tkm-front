@@ -16,21 +16,37 @@
       cancelLabel: {},
       confirmLabel: {},
       title: {},
-      dialogMsg: {}
+      dialogMsg: {},
+      check: {
+        type: Boolean,
+        default: false
+      }
     },
     methods: {
       close () {
-        this.open = false
         this.closeHandler()
-        this.closeHandler = null
+        this.hide()
       },
       confirm () {
-        this.open = false
         this.confirmHandler()
-        this.confirmHandler = null
+        if (!this.check) {
+          this.hide()
+        }
+      },
+      show () {
+        this.open = true
+      },
+      hide () {
+        this.open = false
+        if (this.confirmHandler) {
+          this.confirmHandler = null
+        }
+        if (this.closeHandler) {
+          this.closeHandler = null
+        }
       },
       openDialog (confirm, close) {
-        this.open = true
+        this.show()
         this.closeHandler = close
         this.confirmHandler = confirm
       }

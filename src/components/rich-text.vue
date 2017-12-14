@@ -44,6 +44,10 @@
       onEditorChange ({ editor, html, text }) {
         // console.log('editor change!', editor, html, text)
         this.$emit('update:content', html)
+//        this.$emit('update:content', this.$refs.myTextEditor.$el.innerHTML)
+      },
+      getContentHTML () {
+        return document.querySelector('.ql-editor').innerHTML
       }
     },
     created () {
@@ -71,6 +75,7 @@
     height: 10rem;
     overflow-y: auto;
     resize: vertical;
+    font-size: 0px;
   }
   .rich-text code, kbd, pre, samp {
     font-family: Menlo,Monaco,Consolas,Courier New,monospace,monospace!important;

@@ -39,10 +39,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'login',
-      meta: {
-        title: '登录'
-      },
       redirect: '/login'
     },
     {

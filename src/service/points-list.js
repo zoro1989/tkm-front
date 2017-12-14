@@ -3,6 +3,7 @@
  */
 import httpHandler from 'httpUtils/http-handler'
 import uris from 'router/uris'
+import isNotEmpty from 'utilities/is-not-empty'
 function _normarlizePoints (list) {
   let ret = []
   list.map((row) => {
@@ -17,6 +18,18 @@ function _normarlizePoints (list) {
         {
           name: 'pOrder',
           value: row.pOrder || '0'
+        }
+      ],
+      operations: [
+        {
+          name: '删除',
+          action: 'deletePoint',
+          type: 'delete'
+        },
+        {
+          name: '编辑',
+          action: 'editPoint',
+          type: 'normal'
         }
       ]
     })
@@ -59,7 +72,6 @@ export default {
     formData.append('type', params.type)
     function makeData (originalData) {
       let rows = _normarlizePoints(originalData.data.list)
-      console.log(rows)
       return {
         totalCount: originalData.data.totalCount,
         rows: rows
@@ -104,12 +116,16 @@ export default {
     }, success, fail, makeData)
   },
   save (params, success, fail) {
+    if (!params.validate.checkValid(params.validate.$children)) {
+      fail && fail()
+      return
+    }
     let formData = new FormData()
-    formData.append('id', params.row.id ? params.row.id : '')
-    formData.append('title', params.row.title)
-    formData.append('detail', params.row.detail)
-    formData.append('parentId', params.row.parentId)
-    formData.append('pOrder', params.row.pOrder)
+    formData.append('id', isNotEmpty(params.row.id) ? params.row.id : '')
+    formData.append('title', isNotEmpty(params.row.title) ? params.row.title : '')
+    formData.append('detail', isNotEmpty(params.row.detail) ? params.row.detail : '')
+    formData.append('parentId', isNotEmpty(params.row.parentId) ? params.row.parentId : '')
+    formData.append('pOrder', isNotEmpty(params.row.pOrder) ? params.row.pOrder : 0)
     formData.append('type', params.type)
     function makeData (originalData) {
       return originalData

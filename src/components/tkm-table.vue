@@ -18,13 +18,17 @@
         </mu-tr>
       </mu-thead>
       <mu-tbody>
-        <mu-tr v-for="row,index in tableData.rows"  :key="index" :selected="row.selected" :class="{'row-section':row.sections}">
+        <mu-tr v-for="(row,index) in tableData.rows"  :key="index" :selected="row.selected" :class="{'row-section':row.sections}">
           <template v-if="row.sections">
             <mu-td></mu-td>
             <template v-for="section in row.sections">
               <mu-td>{{section.value}}</mu-td>
             </template>
-            <mu-td></mu-td>
+            <mu-td>
+              <template v-for="operation in row.operations">
+                <mu-raised-button :label="operation.name"  @click="optHandler(operation.action, row)" :backgroundColor="operation.type==='delete'?'red':'pinkA200'"/>
+              </template>
+            </mu-td>
           </template>
           <template v-if="!row.sections">
             <mu-td><mu-checkbox v-model="row.selected" /></mu-td>
